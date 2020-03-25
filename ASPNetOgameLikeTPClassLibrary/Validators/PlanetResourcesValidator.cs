@@ -1,4 +1,5 @@
 ﻿using ASPNetOgameLikeTPClassLibrary.Entities;
+using ASPNetOgameLikeTPClassLibrary.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +18,13 @@ namespace ASPNetOgameLikeTPClassLibrary.Validators
             try
             {
                 List<Resource> resources = value as List<Resource>;
-                List<String> names = new List<string>() { "énergie", "oxygène", "acier", "uranium" };
+                List<String> names = new List<string>() 
+                { 
+                    ResourceNames.Energy.GetName(), 
+                    ResourceNames.Oxygen.GetName(), 
+                    ResourceNames.Steel.GetName(), 
+                    ResourceNames.Uranium.GetName() 
+                };
                 if (resources.Count != 4)
                 {
                     result = false;

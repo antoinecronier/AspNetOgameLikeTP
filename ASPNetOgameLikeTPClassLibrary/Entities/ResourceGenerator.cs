@@ -18,7 +18,6 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
         public virtual List<Resource> ResourceBySecond
         {
             get { return resourceBySecond; }
-            set { resourceBySecond = value; }
         }
         #endregion
 
