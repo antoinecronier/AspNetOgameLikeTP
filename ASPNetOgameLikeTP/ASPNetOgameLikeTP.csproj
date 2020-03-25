@@ -138,6 +138,10 @@
     <Compile Include="Migrations\202003250915580_Partie1.Designer.cs">
       <DependentUpon>202003250915580_Partie1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003251013275_Partie2.cs" />
+    <Compile Include="Migrations\202003251013275_Partie2.Designer.cs">
+      <DependentUpon>202003251013275_Partie2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -219,6 +223,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003250915580_Partie1.resx">
       <DependentUpon>202003250915580_Partie1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003251013275_Partie2.resx">
+      <DependentUpon>202003251013275_Partie2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

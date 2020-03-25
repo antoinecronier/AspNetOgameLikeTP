@@ -50,6 +50,7 @@
     <Compile Include="Entities\ResourceGenerator.cs" />
     <Compile Include="Entities\SolarSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\DatetimeLessThanNow.cs" />
     <Compile Include="Validators\IntOverValidator.cs" />
     <Compile Include="Validators\PlanetResourcesValidator.cs" />
   </ItemGroup>
