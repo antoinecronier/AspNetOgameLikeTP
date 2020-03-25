@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace ASPNetOgameLikeTPClassLibrary.Entities
 {
+    //Do not map FunctionBuilding because no concret classes avaible.
+    [NotMapped]
     public abstract class FunctionBuilding : Building
     {
         #region Private class variable
