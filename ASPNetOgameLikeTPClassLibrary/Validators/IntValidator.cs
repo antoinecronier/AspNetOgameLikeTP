@@ -7,10 +7,16 @@ using System.Threading.Tasks;
 
 namespace ASPNetOgameLikeTPClassLibrary.Validators
 {
-    public class IntOverValidator : ValidationAttribute
+    public class IntValidator : ValidationAttribute
     {
-        public int Min { get; set; }
-        public int Max { get; set; }
+        private int min;
+        private int max;
+
+        public IntValidator(int min, int max)
+        {
+            this.min = min;
+            this.max = max;
+        }
 
         public override bool IsValid(object value)
         {
@@ -20,7 +26,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Validators
             {
                 if (int.TryParse(value.ToString(), out parsedInt))
                 {
-                    if (parsedInt < Min || parsedInt > Max)
+                    if (parsedInt < min || parsedInt > max)
                     {
                         result = false;
                     }

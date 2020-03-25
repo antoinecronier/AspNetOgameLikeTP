@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ASPNetOgameLikeTPClassLibrary.Validators
 {
-    public class DatetimeLessThanNow : ValidationAttribute
+    public class DatetimeMoreThanNow : ValidationAttribute
     {
         public override bool IsValid(object value)
         {
@@ -16,7 +16,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Validators
 
             if (DateTime.TryParse(value.ToString(), out dateTime))
             {
-                if (DateTime.Compare(dateTime, DateTime.Now) > -1)
+                if (DateTime.Compare(dateTime, DateTime.Now) < 0)
                 {
                     result = false;
                 }

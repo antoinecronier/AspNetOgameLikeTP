@@ -18,25 +18,40 @@ namespace ASPNetOgameLikeTPClassLibrary.Validators
             try
             {
                 List<Resource> resources = value as List<Resource>;
-                List<String> names = new List<string>() 
-                { 
-                    ResourceNames.Energy.GetName(), 
-                    ResourceNames.Oxygen.GetName(), 
-                    ResourceNames.Steel.GetName(), 
-                    ResourceNames.Uranium.GetName() 
-                };
                 if (resources.Count != 4)
                 {
                     result = false;
                 }
 
+                bool energyBool = false;
+                bool oxygenBool = false;
+                bool steelBool = false;
+                bool uraniumBool = false;
+
                 resources.ForEach((x) =>
                 {
-                    if (!names.Contains(x.Name))
+                    if (ResourceNames.Energy.GetName() == x.Name)
                     {
-                        result = false;
+                        energyBool = true;
+                    }
+                    else if (ResourceNames.Oxygen.GetName() == x.Name)
+                    {
+                        oxygenBool = true;
+                    }
+                    else if (ResourceNames.Steel.GetName() == x.Name)
+                    {
+                        steelBool = true;
+                    }
+                    else if (ResourceNames.Uranium.GetName() == x.Name)
+                    {
+                        uraniumBool = true;
                     }
                 });
+
+                if (!(energyBool && oxygenBool && steelBool && uraniumBool))
+                {
+                    result = false;
+                }
             }
             catch (Exception e)
             {

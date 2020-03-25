@@ -24,14 +24,14 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
             set { name = value; }
         }
 
-        [IntOverValidator(Min = 0, Max = int.MaxValue)]
+        [IntValidator(0, int.MaxValue)]
         public int? LastQuantity
         {
             get { return lastQuantity; }
             set { lastQuantity = value; }
         }
 
-        [DatetimeLessThanNow]
+        [DatetimeMoreThanNow]
         public DateTime LastUpdate
         {
             get { return lastUpdate; }
