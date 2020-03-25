@@ -14,8 +14,8 @@ namespace ASPNetOgameLikeTP.Models
 
         public GlobalPlanetConfiguration GlobalPlanetConfiguration { get; set; }
 
-        public List<Resource> Resources { get; set; }
+        public List<Resource> Resources { get; set; } = new List<Resource>();
 
-        public List<Building> Buildings { get; set; }
+        public List<Building> Buildings { get; set; } = new List<Building>();
     }
 }

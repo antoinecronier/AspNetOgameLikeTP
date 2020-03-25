@@ -126,6 +126,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Builders\GameBuilder.cs" />
+    <Compile Include="Controllers\BuildingsController.cs" />
     <Compile Include="Controllers\GameAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlanetsController.cs" />
@@ -152,7 +154,9 @@
       <DependentUpon>202003251612015_Partie4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BuildingVM.cs" />
     <Compile Include="Models\GameAdminVM.cs" />
+    <Compile Include="Models\NamingForViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -207,6 +211,11 @@
     <Content Include="Views\Resources\Edit.cshtml" />
     <Content Include="Views\Resources\Index.cshtml" />
     <Content Include="Views\GameAdmin\Configure.cshtml" />
+    <Content Include="Views\Buildings\Create.cshtml" />
+    <Content Include="Views\Buildings\Delete.cshtml" />
+    <Content Include="Views\Buildings\Details.cshtml" />
+    <Content Include="Views\Buildings\Edit.cshtml" />
+    <Content Include="Views\Buildings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
