@@ -134,6 +134,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003250915580_Partie1.cs" />
+    <Compile Include="Migrations\202003250915580_Partie1.Designer.cs">
+      <DependentUpon>202003250915580_Partie1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +215,11 @@
       <Project>{74efec10-350a-4c3a-8c52-d4ee271962e4}</Project>
       <Name>ASPNetOgameLikeTPClassLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003250915580_Partie1.resx">
+      <DependentUpon>202003250915580_Partie1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
