@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,8 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
             set { resources = value; }
         }
 
+        //Because no concret class exist we cannot map this.
+        [NotMapped]
         public virtual List<Building> Buildings
         {
             get { return buildings; }

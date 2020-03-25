@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,16 +28,19 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
             set { level = value; }
         }
 
+        [NotMapped]
         public virtual int? CellNb
         {
             get { return level; }
         }
 
+        [NotMapped]
         public virtual List<Resource> TotalCost
         {
             get { return new List<Resource>(); }
         }
 
+        [NotMapped]
         public virtual List<Resource> NextCost
         {
             get { return new List<Resource>(); }

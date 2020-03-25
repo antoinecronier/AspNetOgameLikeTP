@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
         #endregion
 
         #region Properties
+        [NotMapped]
         public virtual List<Action> Actions
         {
             get { return actions; }
