@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ASPNetOgameLikeTPClassLibrary.Validators;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -15,13 +17,14 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
         private int? level;
         #endregion
         #region Properties
-
+        [StringLength(20, MinimumLength = 5)]
         public String Name
         {
             get { return name; }
             set { name = value; }
         }
 
+        [IntOverValidator(Min = 0, Max = int.MaxValue)]
         public virtual int? Level
         {
             get { return level; }
@@ -29,6 +32,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
         }
 
         [NotMapped]
+        [IntOverValidator(Min = 0, Max = int.MaxValue)]
         public virtual int? CellNb
         {
             get { return level; }

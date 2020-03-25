@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
 		#endregion
 
 		#region Properties
+		[StringLength(20,MinimumLength = 5)]
 		public String Name
 		{
 			get { return name; }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ASPNetOgameLikeTPClassLibrary.Validators;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -18,12 +20,14 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
         #endregion
 
         #region Properties
+        [StringLength(20, MinimumLength = 5)]
         public String Name
         {
             get { return name; }
             set { name = value; }
         }
 
+        [IntOverValidator(Min = 0, Max = int.MaxValue)]
         public int? CaseNb
         {
             get { return caseNb; }
