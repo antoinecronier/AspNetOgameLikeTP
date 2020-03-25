@@ -24,5 +24,9 @@ namespace ASPNetOgameLikeTP.Data
         public System.Data.Entity.DbSet<ASPNetOgameLikeTPClassLibrary.Entities.Planet> Planets { get; set; }
 
         public System.Data.Entity.DbSet<ASPNetOgameLikeTPClassLibrary.Entities.Resource> Resources { get; set; }
+
+        public System.Data.Entity.DbSet<ASPNetOgameLikeTPClassLibrary.Entities.Building> Buildings { get; set; }
+
+        public System.Data.Entity.DbSet<ASPNetOgameLikeTPClassLibrary.Entities.Configuration> Configurations { get; set; }
     }
 }

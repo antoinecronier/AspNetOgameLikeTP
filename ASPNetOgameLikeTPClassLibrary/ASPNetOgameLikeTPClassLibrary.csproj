@@ -48,6 +48,10 @@
     <Compile Include="Entities\ConcretBuildings\SteelGenerator.cs" />
     <Compile Include="Entities\ConcretBuildings\UraniumGenerator.cs" />
     <Compile Include="Annotations\EnumNamingAttribute.cs" />
+    <Compile Include="Entities\Configuration.cs" />
+    <Compile Include="Entities\ConfigurationKeys.cs" />
+    <Compile Include="Entities\Configurations\GlobalGameConfiguration.cs" />
+    <Compile Include="Entities\Configurations\GlobalPlanetConfiguration.cs" />
     <Compile Include="Entities\FunctionBuilding.cs" />
     <Compile Include="Entities\IDbEntity.cs" />
     <Compile Include="Entities\Planet.cs" />
