@@ -57,7 +57,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities.ConcretBuildings
             {
                 List<Resource> result = new List<Resource>()
                 {
-                    new Resource() { Name = ResourceNames.Uranium.GetName(), LastUpdate = DateTime.Now, LastQuantity = int.Parse((7 * Math.Pow(this.Level.Value,3) + 2).ToString()) }
+                    new Resource() { Name = ResourceNames.Uranium.GetName(), LastUpdate = DateTime.Now, LastQuantity = (7 * (this.Level*this.Level*this.Level) + 2) }
                 };
 
                 return result;

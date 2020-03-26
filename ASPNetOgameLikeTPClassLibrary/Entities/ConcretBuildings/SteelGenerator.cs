@@ -11,9 +11,9 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities.ConcretBuildings
     public class SteelGenerator : ResourceGenerator
     {
         private Func<int?, int?> energyFunc = (int? x) => { return x; };
-        private Func<int?, int?> oxygenFunc = (int? x) => { return (2 * int.Parse(Math.Pow(x.Value, 3).ToString())) + (300 * (x / 6)) + 50; };
+        private Func<int?, int?> oxygenFunc = (int? x) => { return (2 * (x*x*x)) + (300 * (x / 6)) + 50; };
         private Func<int?, int?> steelFunc = (int? x) => { return x + (100 * (x / 8)) + 20; };
-        private Func<int?, int?> uraniumFunc = (int? x) => { return 7 * int.Parse(Math.Pow(x.Value, 3).ToString()) + (200 * (x / 12)) + 20; };
+        private Func<int?, int?> uraniumFunc = (int? x) => { return 7 * (x*x*x) + (200 * (x / 12)) + 20; };
         public override List<Resource> TotalCost
         {
             get

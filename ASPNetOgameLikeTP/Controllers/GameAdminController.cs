@@ -56,8 +56,8 @@ namespace ASPNetOgameLikeTP.Controllers
 
             vm.GlobalGameConfiguration = globalConf;
             vm.GlobalPlanetConfiguration = planetConf;
-            vm.Resources = db.Resources.ToList();
-            vm.Buildings = db.Buildings.ToList();
+            vm.Resources = ConfigurationsUtil.Instance.Configuration.Resources;
+            vm.Buildings = ConfigurationsUtil.Instance.Configuration.ResourceGenerators.ToList<Building>();
 
             return View(vm);
         }
@@ -106,7 +106,7 @@ namespace ASPNetOgameLikeTP.Controllers
 
                         return ReturnView(vm);
                     }
-                } 
+                }
 
                 return Redirect("/Home");
             }

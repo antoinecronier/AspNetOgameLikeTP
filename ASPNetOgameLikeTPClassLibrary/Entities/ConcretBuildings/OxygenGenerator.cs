@@ -15,11 +15,27 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities.ConcretBuildings
         private Func<int?, int?> steelFunc = (int? x) => { return (1000 * (x / 8)) + 20; };
         private Func<int?, int?> uraniumFunc = (int? x) => { return (1500 * (x / 20)) + 20; };
 
-        
-        public Func<int?, int?> EnergyFunc
+        private String oxygenFuncString;
+        public String OxygenFuncString
         {
-            get { return this.energyFunc; }
-            set { this.energyFunc = value; }
+            get { return this.oxygenFuncString; }
+            set 
+            {
+                this.oxygenFuncString = value;
+                int[] terms = value.Split('|').Select(x => int.Parse(x)).ToArray();
+                if (terms.Length == 3)
+                {
+                    this.oxygenFunc = (int? x) => { return (terms[0] * (x / terms[1])) + terms[2]; };
+                }
+                else if(terms.Length == 4)
+                {
+                    this.oxygenFunc = (int? x) => { return (terms[0] * (x * x)) + (terms[1] * (x / terms[2])) + terms[3]; };
+                }
+                else if (terms.Length == 5)
+                {
+                    this.oxygenFunc = (int? x) => { return (terms[0] * (x * x * x)) +  (terms[1] * (x * x)) + (terms[2] * (x / terms[3])) + terms[4]; };
+                }
+            }
         }
 
 

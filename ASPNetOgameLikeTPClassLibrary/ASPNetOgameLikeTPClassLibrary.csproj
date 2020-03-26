@@ -43,12 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Building.cs" />
-    <Compile Include="Entities\ConcretBuildings\ConcretBaseBuilding.cs" />
-    <Compile Include="Entities\ConcretBuildings\OxygenGenerator.cs" />
-    <Compile Include="Entities\ConcretBuildings\PowerPlant.cs" />
-    <Compile Include="Entities\ConcretBuildings\SteelGenerator.cs" />
-    <Compile Include="Entities\ConcretBuildings\UraniumGenerator.cs" />
     <Compile Include="Annotations\EnumNamingAttribute.cs" />
+    <Compile Include="Entities\ConcretBuildings\ConcretBaseBuilding.cs" />
     <Compile Include="Entities\Configuration.cs" />
     <Compile Include="Entities\ConfigurationKeys.cs" />
     <Compile Include="Entities\Configurations\GameConfiguration.cs" />
