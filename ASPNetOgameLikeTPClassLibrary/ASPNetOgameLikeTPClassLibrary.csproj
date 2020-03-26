@@ -51,6 +51,7 @@
     <Compile Include="Annotations\EnumNamingAttribute.cs" />
     <Compile Include="Entities\Configuration.cs" />
     <Compile Include="Entities\ConfigurationKeys.cs" />
+    <Compile Include="Entities\Configurations\BuildingConfiguration.cs" />
     <Compile Include="Entities\Configurations\GlobalGameConfiguration.cs" />
     <Compile Include="Entities\Configurations\GlobalPlanetConfiguration.cs" />
     <Compile Include="Entities\FunctionBuilding.cs" />

@@ -158,9 +158,12 @@
     <Compile Include="Models\GameAdminVM.cs" />
     <Compile Include="Models\NamingForViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ConfigurationsUtil.cs" />
+    <Compile Include="Utils\FileUtil.cs" />
     <Compile Include="Utils\ValidationUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Configurations\GameConfigurations.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
