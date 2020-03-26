@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using ASPNetOgameLikeTPClassLibrary.Entities;
+using ASPNetOgameLikeTPClassLibrary.Entities.Configurations;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,7 @@ namespace ASPNetOgameLikeTP.Utils
 
         private ConfigurationsUtil()
         {
-            JsonConvert.DeserializeObject(FileUtil.ReadServerFile("~/Content/Configurations/GameConfigurations.txt"));
+            configuration = JsonConvert.DeserializeObject<GameConfiguration>(FileUtil.ReadServerFile("~/Content/Configurations/GameConfigurations.txt"));
         }
 
         public static ConfigurationsUtil Instance
@@ -29,6 +31,36 @@ namespace ASPNetOgameLikeTP.Utils
                     }
                 }
                 return _instance;
+            }
+        }
+
+        public GameConfiguration configuration { get; private set; }
+
+        public List<Building> Buildings
+        {
+            get 
+            {
+                List<Building> result = new List<Building>();
+                foreach (var buildingId in configuration.GlobalPlanetConfiguration.BuildingsIds)
+                {
+                    result.Add(configuration.Buildings.ElementAt(buildingId));
+                }
+                
+                return result; 
+            }
+        }
+
+        public List<Resource> Resources
+        {
+            get
+            {
+                List<Resource> result = new List<Resource>();
+                foreach (var resourceId in configuration.GlobalPlanetConfiguration.ResourcesIds)
+                {
+                    result.Add(configuration.Resources.ElementAt(resourceId));
+                }
+
+                return result;
             }
         }
     }

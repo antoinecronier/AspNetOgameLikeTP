@@ -15,7 +15,13 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities.ConcretBuildings
         private Func<int?, int?> steelFunc = (int? x) => { return (1000 * (x / 8)) + 20; };
         private Func<int?, int?> uraniumFunc = (int? x) => { return (1500 * (x / 20)) + 20; };
 
-        public Func<int?, int?> EnergyFunc { get; set; }
+        
+        public Func<int?, int?> EnergyFunc
+        {
+            get { return this.energyFunc; }
+            set { this.energyFunc = value; }
+        }
+
 
         public override List<Resource> TotalCost
         {
