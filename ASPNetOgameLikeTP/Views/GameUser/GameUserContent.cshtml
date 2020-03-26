@@ -1,1 +1,24 @@
-﻿<h3>Content</h3>
+﻿@model ASPNetOgameLikeTP.Models.GameUserVM
+
+<div class="row">
+    <div class="col-md-5" style="text-align:center">
+        <img class="col-md-5" style="text-align:center" src="https://www.1jour1actu.com/wp-content/uploads/PIA23408_NASA-s-Goddard-Space-Flight-Center.jpg"/>
+        <div class="col-md-5" style="text-align:left">
+            @Html.DisplayFor(x => Model.PrincipalPlanet.Name)
+        </div>
+    </div>
+    <div class="col-md-5" style="text-align:center">
+        @*@Html.Action("GetResources", "GameUser", new { resources = Model.PrincipalPlanet.Resources })*@
+    </div>
+</div>
+
+<div class="row">
+
+    @foreach (var item in Model.PrincipalPlanet.Buildings)
+    {
+        <div class="col-md-3" style="text-align:center">
+            @*@Html.Action("GetBuilding", "GameUser", new { building = item })*@
+        </div>
+    }
+
+</div>

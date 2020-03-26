@@ -1,1 +1,24 @@
-﻿<h1>Left Panel</h1>
+﻿@model ASPNetOgameLikeTP.Models.GameUserVM
+
+<div class="row">
+    <div class="col-md-4" style="text-align:center">
+        @Html.DisplayFor(model => model.SolarSystem.Name)
+    </div>
+</div>
+@{ int i = 1;}
+@foreach (var item in Model.SolarSystem.Planets)
+{
+    <div class="row">
+        <div class="col-md-1" style="text-align:center">
+            @i
+        </div>
+        <img class="col-md-4" style="text-align:center" src="https://www.1jour1actu.com/wp-content/uploads/PIA23408_NASA-s-Goddard-Space-Flight-Center.jpg" />
+        <div class="col-md-5" style="text-align:center">
+            @Html.DisplayFor(x => item.Name)
+        </div>
+    </div>
+
+    i++;
+}
+
+
