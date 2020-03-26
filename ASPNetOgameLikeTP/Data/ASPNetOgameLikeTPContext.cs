@@ -28,5 +28,19 @@ namespace ASPNetOgameLikeTP.Data
         public System.Data.Entity.DbSet<ASPNetOgameLikeTPClassLibrary.Entities.Building> Buildings { get; set; }
 
         public System.Data.Entity.DbSet<ASPNetOgameLikeTPClassLibrary.Entities.Configuration> Configurations { get; set; }
+
+        public void ClearDatabase()
+        {
+            using (var db = new ASPNetOgameLikeTPContext())
+            {
+                db.Buildings.RemoveRange(db.Buildings);
+                db.Configurations.RemoveRange(db.Configurations);
+                db.Planets.RemoveRange(db.Planets);
+                db.Resources.RemoveRange(db.Resources);
+                db.SolarSystems.RemoveRange(db.SolarSystems);
+
+                db.SaveChanges();
+            }
+        }
     }
 }

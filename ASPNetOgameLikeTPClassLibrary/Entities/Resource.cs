@@ -31,7 +31,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
             set { lastQuantity = value; }
         }
 
-        [DatetimeMoreThanNow]
+        [DatetimeLessThanNow]
         public DateTime LastUpdate
         {
             get { return lastUpdate; }

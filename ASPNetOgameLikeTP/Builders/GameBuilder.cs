@@ -1,6 +1,7 @@
 ﻿using ASPNetOgameLikeTP.Data;
 using ASPNetOgameLikeTPClassLibrary.Entities;
 using ASPNetOgameLikeTPClassLibrary.Entities.Configurations;
+using ASPNetOgameLikeTPClassLibrary.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,27 +19,11 @@ namespace ASPNetOgameLikeTP.Builders
 
         }
 
-        public GameBuilder ClearDatabase()
+        public List<SolarSystem> Build()
         {
+            List<SolarSystem> solarSystems = new List<SolarSystem>();
             using (var db = new ASPNetOgameLikeTPContext())
             {
-                db.Buildings.RemoveRange(db.Buildings);
-                db.Configurations.RemoveRange(db.Configurations);
-                db.Planets.RemoveRange(db.Planets);
-                db.Resources.RemoveRange(db.Resources);
-                db.SolarSystems.RemoveRange(db.SolarSystems);
-
-                db.SaveChanges();
-            }
-
-            return this;
-        }
-
-        public void ApplyConfig()
-        {
-            using (var db = new ASPNetOgameLikeTPContext())
-            {
-                List<SolarSystem> solarSystems = new List<SolarSystem>();
                 for (int i = 1; i < this.globalGameConfiguration.SolarSystemNb + 1; i++)
                 {
                     SolarSystem solarSystem = new SolarSystem();
@@ -48,25 +33,32 @@ namespace ASPNetOgameLikeTP.Builders
 
                         foreach (var item in this.globalPlanetConfiguration.BuildingsIds)
                         {
-                            Building building = db.Buildings.Find(item);
-                            building.Id = null;
+                            Building buildingTemp = db.Buildings.Find(item);
+                            Building building = Activator.CreateInstance(buildingTemp.GetType()) as Building;
+                            building.Name = buildingTemp.Name;
+                            building.Level = buildingTemp.Level;
                             planet.Buildings.Add(building);
                         }
 
                         foreach (var item in this.globalPlanetConfiguration.ResourcesIds)
                         {
-                            Resource resource = db.Resources.Find(item);
-                            resource.Id = null;
+                            Resource resourceTemp = db.Resources.Find(item);
+                            Resource resource = new Resource();
+                            resource.Name = resourceTemp.Name;
+                            resource.LastQuantity = resourceTemp.LastQuantity;
+                            resource.LastUpdate = resourceTemp.LastUpdate;
                             planet.Resources.Add(resource);
                         }
 
+                        planet.CaseNb = MathUtil.DrawRandom(20*j%300,30*j%300);
+
                         solarSystem.Planets.Add(planet);
                     }
+                    solarSystem.Name = "système solaire " + i;
                     solarSystems.Add(solarSystem);
                 }
-                
-                db.SaveChanges();
             }
+            return solarSystems;
         }
 
         public GameBuilderChain1 AddGlobalGameConfiguration(GlobalGameConfiguration globalGameConfiguration)

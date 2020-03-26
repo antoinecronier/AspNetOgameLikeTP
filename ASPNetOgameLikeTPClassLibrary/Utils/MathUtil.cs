@@ -19,5 +19,15 @@ namespace ASPNetOgameLikeTPClassLibrary.Utils
 
             return result;
         }
+
+        public static int? DrawRandom(int min, int max)
+        {
+            int? result = null;
+
+            Random rand = new Random();
+            result = rand.Next(min, max);
+
+            return result;
+        }
     }
 }

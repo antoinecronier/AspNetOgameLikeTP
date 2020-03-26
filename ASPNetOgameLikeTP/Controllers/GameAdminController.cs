@@ -1,13 +1,16 @@
 ﻿using ASPNetOgameLikeTP.Builders;
 using ASPNetOgameLikeTP.Data;
 using ASPNetOgameLikeTP.Models;
+using ASPNetOgameLikeTP.Utils;
 using ASPNetOgameLikeTPClassLibrary.Entities;
 using ASPNetOgameLikeTPClassLibrary.Entities.Configurations;
 using ASPNetOgameLikeTPClassLibrary.Extensions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -84,21 +87,45 @@ namespace ASPNetOgameLikeTP.Controllers
                 db.SaveChanges();
 
                 GameBuilder builder = new GameBuilder();
-                builder.ClearDatabase().AddGlobalGameConfiguration(vm.GlobalGameConfiguration).AddPlanetsOnSolarSystem(vm.GlobalPlanetConfiguration).ApplyConfig();
+                List<SolarSystem> solarSystems = builder.AddGlobalGameConfiguration(vm.GlobalGameConfiguration).AddPlanetsOnSolarSystem(vm.GlobalPlanetConfiguration).Build();
+
+                if (ValidationUtil.ValidateObject(solarSystems))
+                {
+                    try
+                    {
+                        db.ClearDatabase();
+                        db.SolarSystems.AddRange(solarSystems);
+                        db.SaveChanges();
+                    }
+                    catch (DbEntityValidationException ex)
+                    {
+                        var error = ex.EntityValidationErrors.First().ValidationErrors.First();
+                        Console.WriteLine("error : " + error.PropertyName);
+                        Console.WriteLine("message : " + error.ErrorMessage);
+                        this.ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+
+                        return ReturnView(vm);
+                    }
+                } 
 
                 return Redirect("/Home");
             }
             else
             {
-                var globalConf = JsonConvert.DeserializeObject<GlobalGameConfiguration>(db.Configurations.Find(ConfigurationKeys.GlobalGameConfiguration.GetName()).Data);
-                var planetConf = JsonConvert.DeserializeObject<GlobalPlanetConfiguration>(db.Configurations.Find(ConfigurationKeys.GlobalPlanetConfiguration.GetName()).Data);
-                vm.GlobalGameConfiguration = globalConf;
-                vm.GlobalPlanetConfiguration = planetConf;
-                vm.Resources = db.Resources.ToList();
-                vm.Buildings = db.Buildings.ToList();
-
-                return View(vm);
+                return ReturnView(vm);
             }
+        }
+
+        private ActionResult ReturnView(GameAdminVM vm)
+        {
+            var globalConf = JsonConvert.DeserializeObject<GlobalGameConfiguration>(db.Configurations.Find(ConfigurationKeys.GlobalGameConfiguration.GetName()).Data);
+            var planetConf = JsonConvert.DeserializeObject<GlobalPlanetConfiguration>(db.Configurations.Find(ConfigurationKeys.GlobalPlanetConfiguration.GetName()).Data);
+            vm.GlobalGameConfiguration = globalConf;
+            vm.GlobalPlanetConfiguration = planetConf;
+            vm.Resources = db.Resources.ToList();
+            vm.Buildings = db.Buildings.ToList();
+
+            return View(vm);
         }
     }
 }
