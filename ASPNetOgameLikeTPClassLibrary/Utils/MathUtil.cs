@@ -10,7 +10,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Utils
     {
         public static int? FactorialExpression(Func<int?, int?> expression, int? level)
         {
-            int? result = null;
+            int? result = 0;
 
             for (int i = 1; i < level + 1; i++)
             {
