@@ -87,7 +87,7 @@ namespace ASPNetOgameLikeTP.Controllers
                 db.SaveChanges();
 
                 GameBuilder builder = new GameBuilder();
-                List<SolarSystem> solarSystems = builder.AddGlobalGameConfiguration(vm.GlobalGameConfiguration).AddPlanetsOnSolarSystem(vm.GlobalPlanetConfiguration).Build();
+                List<SolarSystem> solarSystems = builder.AddGlobalGameConfiguration(vm.GlobalGameConfiguration).AddPlanetsOnSolarSystem(vm.GlobalPlanetConfiguration).BuildAll();
 
                 if (ValidationUtil.ValidateObject(solarSystems))
                 {
@@ -122,8 +122,8 @@ namespace ASPNetOgameLikeTP.Controllers
             var planetConf = JsonConvert.DeserializeObject<GlobalPlanetConfiguration>(db.Configurations.Find(ConfigurationKeys.GlobalPlanetConfiguration.GetName()).Data);
             vm.GlobalGameConfiguration = globalConf;
             vm.GlobalPlanetConfiguration = planetConf;
-            vm.Resources = db.Resources.ToList();
-            vm.Buildings = db.Buildings.ToList();
+            vm.Resources = ConfigurationsUtil.Instance.Configuration.Resources;
+            vm.Buildings = ConfigurationsUtil.Instance.Configuration.ResourceGenerators.ToList<Building>();
 
             return View(vm);
         }

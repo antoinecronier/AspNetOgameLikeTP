@@ -127,8 +127,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Builders\GameBuilder.cs" />
+    <Compile Include="Builders\PlanetBuilder.cs" />
     <Compile Include="Controllers\BuildingsController.cs" />
     <Compile Include="Controllers\GameAdminController.cs" />
+    <Compile Include="Controllers\GameUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlanetsController.cs" />
     <Compile Include="Controllers\ResourcesController.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BuildingVM.cs" />
     <Compile Include="Models\GameAdminVM.cs" />
+    <Compile Include="Models\GameUserVM.cs" />
     <Compile Include="Models\NamingForViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ConfigurationsUtil.cs" />
@@ -220,10 +223,13 @@
     <Content Include="Views\Buildings\Details.cshtml" />
     <Content Include="Views\Buildings\Edit.cshtml" />
     <Content Include="Views\Buildings\Index.cshtml" />
+    <Content Include="Views\GameUser\GameUserView.cshtml" />
+    <Content Include="Views\GameUser\GameUserTopHeadband.cshtml" />
+    <Content Include="Views\GameUser\GameUserLeftPanel.cshtml" />
+    <Content Include="Views\GameUser\GameUserContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Game\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

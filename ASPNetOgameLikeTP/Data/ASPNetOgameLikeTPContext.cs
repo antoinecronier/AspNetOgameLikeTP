@@ -34,7 +34,7 @@ namespace ASPNetOgameLikeTP.Data
             using (var db = new ASPNetOgameLikeTPContext())
             {
                 db.Buildings.RemoveRange(db.Buildings);
-                db.Configurations.RemoveRange(db.Configurations);
+                //db.Configurations.RemoveRange(db.Configurations);
                 db.Planets.RemoveRange(db.Planets);
                 db.Resources.RemoveRange(db.Resources);
                 db.SolarSystems.RemoveRange(db.SolarSystems);

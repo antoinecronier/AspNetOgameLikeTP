@@ -37,9 +37,9 @@ namespace ASPNetOgameLikeTP.Utils
 
         public GameConfiguration Configuration { get; private set; }
 
-        public List<Building> PlanetBuildings(GlobalPlanetConfiguration globalPlanetConfiguration)
+        public List<ResourceGenerator> PlanetResourceGenerators(GlobalPlanetConfiguration globalPlanetConfiguration)
         {
-            List<Building> result = new List<Building>();
+            List<ResourceGenerator> result = new List<ResourceGenerator>();
             foreach (var buildingId in globalPlanetConfiguration.BuildingsIds)
             {
                 result.Add(Configuration.ResourceGenerators.ElementAt(buildingId));
