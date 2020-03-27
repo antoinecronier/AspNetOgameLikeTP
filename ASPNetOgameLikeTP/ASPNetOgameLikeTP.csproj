@@ -227,6 +227,8 @@
     <Content Include="Views\GameUser\GameUserTopHeadband.cshtml" />
     <Content Include="Views\GameUser\GameUserLeftPanel.cshtml" />
     <Content Include="Views\GameUser\GameUserContent.cshtml" />
+    <Content Include="Views\GameUser\GameUserBuilding.cshtml" />
+    <Content Include="Views\GameUser\GameUserResources.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

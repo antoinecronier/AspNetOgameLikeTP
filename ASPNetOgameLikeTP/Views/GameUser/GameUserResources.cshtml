@@ -1,0 +1,15 @@
+﻿@model List<ASPNetOgameLikeTPClassLibrary.Entities.Resource>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <img class="col-md-3" src="https://www.1jour1actu.com/wp-content/uploads/PIA23408_NASA-s-Goddard-Space-Flight-Center.jpg"/>
+        <div class="col-md-3" style="text-align:center">
+            @Html.DisplayFor(x => item.Name)
+        </div>
+        <div class="col-md-3" style="text-align:center">
+            @Html.DisplayFor(x => item.LastQuantity)
+        </div>
+    </div>
+}
+

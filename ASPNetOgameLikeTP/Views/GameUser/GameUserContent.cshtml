@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="col-md-5" style="text-align:center">
-        @*@Html.Action("GetResources", "GameUser", new { resources = Model.PrincipalPlanet.Resources })*@
+        @Html.Action("GetResources", "GameUser", new { resources = Model.PrincipalPlanet.Resources })
     </div>
 </div>
 
@@ -17,7 +17,7 @@
     @foreach (var item in Model.PrincipalPlanet.Buildings)
     {
         <div class="col-md-3" style="text-align:center">
-            @*@Html.Action("GetBuilding", "GameUser", new { building = item })*@
+            @Html.Action("GetBuilding", "GameUser", new { building = item })
         </div>
     }
 

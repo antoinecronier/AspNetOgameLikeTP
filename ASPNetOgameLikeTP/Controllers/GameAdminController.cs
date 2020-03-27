@@ -5,6 +5,7 @@ using ASPNetOgameLikeTP.Utils;
 using ASPNetOgameLikeTPClassLibrary.Entities;
 using ASPNetOgameLikeTPClassLibrary.Entities.Configurations;
 using ASPNetOgameLikeTPClassLibrary.Extensions;
+using ASPNetOgameLikeTPClassLibrary.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -57,7 +58,9 @@ namespace ASPNetOgameLikeTP.Controllers
             vm.GlobalGameConfiguration = globalConf;
             vm.GlobalPlanetConfiguration = planetConf;
             vm.Resources = ConfigurationsUtil.Instance.Configuration.Resources;
+            ClassUtil.IdsUpdater(vm.Resources);
             vm.Buildings = ConfigurationsUtil.Instance.Configuration.ResourceGenerators.ToList<Building>();
+            ClassUtil.IdsUpdater(vm.Buildings);
 
             return View(vm);
         }
@@ -123,7 +126,9 @@ namespace ASPNetOgameLikeTP.Controllers
             vm.GlobalGameConfiguration = globalConf;
             vm.GlobalPlanetConfiguration = planetConf;
             vm.Resources = ConfigurationsUtil.Instance.Configuration.Resources;
+            ClassUtil.IdsUpdater(vm.Resources);
             vm.Buildings = ConfigurationsUtil.Instance.Configuration.ResourceGenerators.ToList<Building>();
+            ClassUtil.IdsUpdater(vm.Buildings);
 
             return View(vm);
         }
