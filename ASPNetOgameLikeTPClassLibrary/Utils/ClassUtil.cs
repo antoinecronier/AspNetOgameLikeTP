@@ -53,5 +53,10 @@ namespace ASPNetOgameLikeTPClassLibrary.Utils
 
             return result;
         }
+
+        public static String ImgPath(String name)
+        {
+            return "~/Content/Drawables/" + name + ".jpg";
+        }
     }
 }

@@ -175,6 +175,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Drawables\Energy.jpg" />
+    <Content Include="Content\Drawables\EnergyGenerator.jpg" />
+    <Content Include="Content\Drawables\Oxygen.jpg" />
+    <Content Include="Content\Drawables\OxygenGenerator.jpg" />
+    <Content Include="Content\Drawables\Planet.jpg" />
+    <Content Include="Content\Drawables\Steel.jpg" />
+    <Content Include="Content\Drawables\SteelGenerator.jpg" />
+    <Content Include="Content\Drawables\Uranium.jpg" />
+    <Content Include="Content\Drawables\UraniumGenerator.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

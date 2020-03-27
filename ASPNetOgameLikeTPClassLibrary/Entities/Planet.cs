@@ -1,4 +1,5 @@
-﻿using ASPNetOgameLikeTPClassLibrary.Validators;
+﻿using ASPNetOgameLikeTPClassLibrary.Utils;
+using ASPNetOgameLikeTPClassLibrary.Validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ASPNetOgameLikeTPClassLibrary.Entities
 {
-    public class Planet : IDbEntity
+    public class Planet : IDbEntity, IPrintable
     {
         #region Private class variable
         private long? id;
@@ -17,6 +18,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
         private int? caseNb;
         private List<Resource> resources;
         private List<Building> buildings;
+        private string print;
         #endregion
 
         #region Properties
@@ -47,6 +49,11 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
             set { buildings = value; }
         }
 
+        public String Print
+        {
+            get { return print; }
+            set { print = ClassUtil.ImgPath(value); }
+        }
         #endregion
 
         #region Implemented properties

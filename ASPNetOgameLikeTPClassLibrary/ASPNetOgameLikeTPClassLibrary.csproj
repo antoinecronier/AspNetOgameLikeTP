@@ -52,6 +52,7 @@
     <Compile Include="Entities\Configurations\GlobalPlanetConfiguration.cs" />
     <Compile Include="Entities\FunctionBuilding.cs" />
     <Compile Include="Entities\IDbEntity.cs" />
+    <Compile Include="Entities\IPrintable.cs" />
     <Compile Include="Entities\Planet.cs" />
     <Compile Include="Entities\Resource.cs" />
     <Compile Include="Entities\ResourceGenerator.cs" />

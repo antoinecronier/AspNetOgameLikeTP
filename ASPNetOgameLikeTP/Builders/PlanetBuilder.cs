@@ -34,6 +34,7 @@ namespace ASPNetOgameLikeTP.Builders
 
             result.Name = this.name;
             result.CaseNb = this.caseNb == null ? 0 : this.caseNb;
+            result.Print = "Planet";
 
             using (var db = new ASPNetOgameLikeTPContext())
             {

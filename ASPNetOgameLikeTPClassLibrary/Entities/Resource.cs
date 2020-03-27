@@ -1,4 +1,5 @@
-﻿using ASPNetOgameLikeTPClassLibrary.Validators;
+﻿using ASPNetOgameLikeTPClassLibrary.Utils;
+using ASPNetOgameLikeTPClassLibrary.Validators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace ASPNetOgameLikeTPClassLibrary.Entities
 {
-    public class Resource : IDbEntity
+    public class Resource : IDbEntity, IPrintable
     {
         #region Private class variable
         private long? id;
         private String name;
         private int? lastQuantity;
         private DateTime lastUpdate;
+        private string print;
         #endregion
         #region Properties
         [StringLength(20, MinimumLength = 5)]
@@ -38,6 +40,12 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
         {
             get { return lastUpdate; }
             set { lastUpdate = value; }
+        }
+
+        public String Print
+        {
+            get { return print; }
+            set { print = ClassUtil.ImgPath(value); }
         }
         #endregion
         #region Implemented properties
