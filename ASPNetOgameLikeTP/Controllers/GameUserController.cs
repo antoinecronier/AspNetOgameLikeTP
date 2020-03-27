@@ -5,6 +5,7 @@ using ASPNetOgameLikeTPClassLibrary.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,20 +20,40 @@ namespace ASPNetOgameLikeTP.Controllers
             if (vm.PrincipalPlanet == null || vm.SolarSystem == null)
             {
                 vm = new GameUserVM();
-                SolarSystem ss = new SolarSystem();
-                ss.Name = "ss1";
-                for (int i = 1; i < 10; i++)
-                {
-                    ss.Planets.Add(new PlanetBuilder().Name("p"+i).Build());
-                }
-                vm.PrincipalPlanet = new PlanetBuilder().Name("Principale").Build();
-                ss.Planets.Add(vm.PrincipalPlanet);
-
-                vm.SolarSystem = ss;
+                InitFakeDatas(vm);
             }
-            
+
 
             return View(vm);
+        }
+
+        private static void InitFakeDatas(GameUserVM vm)
+        {
+            SolarSystem ss = new SolarSystem();
+            ss.Name = "system solaire 1";
+            for (int i = 1; i < 10; i++)
+            {
+                ss.Planets.Add(new PlanetBuilder().Name("planet " + i).Build());
+            }
+            vm.PrincipalPlanet = new PlanetBuilder().Name("Principale").Build();
+            ss.Planets.Add(vm.PrincipalPlanet);
+
+            vm.SolarSystem = ss;
+
+            try
+            {
+                using (var db = new ASPNetOgameLikeTPContext())
+                {
+                    db.SolarSystems.Add(ss);
+                    db.SaveChanges();
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var error = ex.EntityValidationErrors.First().ValidationErrors.First();
+                Console.WriteLine("error : " + error.PropertyName);
+                Console.WriteLine("message : " + error.ErrorMessage);
+            }
         }
 
         public ActionResult UpgradeBuilding(ResourceGenerator building)

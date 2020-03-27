@@ -1,6 +1,7 @@
 ﻿using ASPNetOgameLikeTPClassLibrary.Entities;
 using ASPNetOgameLikeTPClassLibrary.Entities.Configurations;
 using ASPNetOgameLikeTPClassLibrary.Extensions;
+using ASPNetOgameLikeTPClassLibrary.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,12 @@ namespace ASPNetOgameLikeTP.Utils
             List<ResourceGenerator> result = new List<ResourceGenerator>();
             foreach (var buildingId in globalPlanetConfiguration.BuildingsIds)
             {
-                result.Add(Configuration.ResourceGenerators.ElementAt(buildingId));
+                var data = Configuration.ResourceGenerators.ElementAt(buildingId);
+                if (data.Level == null)
+                {
+                    data.Level = 0;
+                }
+                result.Add(ClassUtil.Copy(data));
             }
 
             return result;
@@ -53,7 +59,12 @@ namespace ASPNetOgameLikeTP.Utils
             List<Resource> result = new List<Resource>();
             foreach (var resourceId in globalPlanetConfiguration.ResourcesIds)
             {
-                result.Add(Configuration.Resources.ElementAt(resourceId));
+                var data = Configuration.Resources.ElementAt(resourceId);
+                if (data.LastQuantity == null)
+                {
+                    data.LastQuantity = 0;
+                }
+                result.Add(ClassUtil.Copy(data));
             }
 
             return result;

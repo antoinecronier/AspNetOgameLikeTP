@@ -50,28 +50,16 @@ namespace ASPNetOgameLikeTP.Builders
                         foreach (var item in this.globalPlanetConfiguration.BuildingsIds)
                         {
                             ResourceGenerator buildingTemp = ConfigurationsUtil.Instance.PlanetResourceGenerators(globalPlanetConfiguration).ElementAt(item);
-                            ResourceGenerator building = new ResourceGenerator();
-                            building.Level = buildingTemp.Level;
-                            building.Name = buildingTemp.Name;
-                            building.OxygenCostFuncString = buildingTemp.OxygenCostFuncString;
-                            building.OxygenGenFuncString = buildingTemp.OxygenGenFuncString;
-                            building.SteelCostFuncString = buildingTemp.SteelCostFuncString;
-                            building.SteelGenFuncString = buildingTemp.SteelGenFuncString;
-                            building.UraniumCostFuncString = buildingTemp.UraniumCostFuncString;
-                            building.UraniumGenFuncString = buildingTemp.UraniumGenFuncString;
-                            building.EnergyCostFuncString = buildingTemp.EnergyCostFuncString;
-                            building.EnergyGenFuncString = buildingTemp.EnergyGenFuncString;
-                            planet.Buildings.Add(building);
+
+                            planet.Buildings.Add(ClassUtil.Copy(buildingTemp));
                         }
 
                         foreach (var item in this.globalPlanetConfiguration.ResourcesIds)
                         {
                             Resource resourceTemp = ConfigurationsUtil.Instance.PlanetResources(globalPlanetConfiguration).ElementAt(item);
-                            Resource resource = new Resource();
-                            resource.Name = resourceTemp.Name;
-                            resource.LastUpdate = DateTime.Now;
-                            resource.LastQuantity = 0;
-                            planet.Resources.Add(resource);
+                            resourceTemp.LastUpdate = DateTime.Now;
+                            resourceTemp.LastQuantity = 0;
+                            planet.Resources.Add(ClassUtil.Copy(resourceTemp));
                         }
 
                         planet.CaseNb = MathUtil.DrawRandom(20*j%300,30*j%300);

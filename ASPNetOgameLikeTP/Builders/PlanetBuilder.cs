@@ -33,13 +33,14 @@ namespace ASPNetOgameLikeTP.Builders
             Planet result = new Planet();
 
             result.Name = this.name;
-            result.CaseNb = this.caseNb;
+            result.CaseNb = this.caseNb == null ? 0 : this.caseNb;
+
             using (var db = new ASPNetOgameLikeTPContext())
             {
                 var resPlanetConf = db.Configurations.Find(ConfigurationKeys.GlobalPlanetConfiguration.GetName());
                 var planetConf = JsonConvert.DeserializeObject<GlobalPlanetConfiguration>(resPlanetConf.Data);
-                result.Buildings = ConfigurationsUtil.Instance.PlanetResourceGenerators(planetConf).ToList<Building>();
-                result.Resources = ConfigurationsUtil.Instance.PlanetResources(planetConf);
+                result.Buildings = new List<Building>(ConfigurationsUtil.Instance.PlanetResourceGenerators(planetConf).ToList<Building>());
+                result.Resources = new List<Resource>(ConfigurationsUtil.Instance.PlanetResources(planetConf));
             }
 
             return result;

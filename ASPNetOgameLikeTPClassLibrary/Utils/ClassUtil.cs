@@ -26,5 +26,32 @@ namespace ASPNetOgameLikeTPClassLibrary.Utils
                 i++;
             }
         }
+
+        public static ResourceGenerator Copy(ResourceGenerator item)
+        {
+            ResourceGenerator result = new ResourceGenerator();
+            result.Level = item.Level;
+            result.Name = item.Name;
+            result.OxygenCostFuncString = item.OxygenCostFuncString;
+            result.OxygenGenFuncString = item.OxygenGenFuncString;
+            result.SteelCostFuncString = item.SteelCostFuncString;
+            result.SteelGenFuncString = item.SteelGenFuncString;
+            result.UraniumCostFuncString = item.UraniumCostFuncString;
+            result.UraniumGenFuncString = item.UraniumGenFuncString;
+            result.EnergyCostFuncString = item.EnergyCostFuncString;
+            result.EnergyGenFuncString = item.EnergyGenFuncString;
+
+            return result;
+        }
+
+        public static Resource Copy(Resource item)
+        {
+            Resource result = new Resource();
+            result.Name = item.Name;
+            result.LastUpdate = item.LastUpdate;
+            result.LastQuantity = item.LastQuantity;
+
+            return result;
+        }
     }
 }
