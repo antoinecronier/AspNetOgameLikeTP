@@ -2,6 +2,7 @@
 using ASPNetOgameLikeTP.Data;
 using ASPNetOgameLikeTP.Models;
 using ASPNetOgameLikeTP.Utils;
+using ASPNetOgameLikeTPClassLibrary.Comparers;
 using ASPNetOgameLikeTPClassLibrary.Entities;
 using ASPNetOgameLikeTPClassLibrary.Entities.Configurations;
 using ASPNetOgameLikeTPClassLibrary.Extensions;
@@ -12,8 +13,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 
 namespace ASPNetOgameLikeTP.Controllers
@@ -70,9 +73,9 @@ namespace ASPNetOgameLikeTP.Controllers
         {
             if (ModelState.IsValid)
             {
-                Configuration globalConf = new Configuration() 
-                { 
-                    Key = ConfigurationKeys.GlobalGameConfiguration.GetName(), 
+                Configuration globalConf = new Configuration()
+                {
+                    Key = ConfigurationKeys.GlobalGameConfiguration.GetName(),
                     Data = JsonConvert.SerializeObject(vm.GlobalGameConfiguration)
                 };
                 Configuration planetConf = new Configuration()
@@ -131,6 +134,53 @@ namespace ASPNetOgameLikeTP.Controllers
             ClassUtil.IdsUpdater(vm.Buildings);
 
             return View(vm);
+        }
+
+        public ActionResult Printables()
+        {
+            PrintableVM vm = new PrintableVM();
+            vm.Resources = db.Resources.ToList().Distinct(new ResourceComparer()).ToList();
+            vm.ResourceGenerators = db.Buildings.ToList().OfType<ResourceGenerator>().Distinct(new ResourceGeneratorComparer()).ToList();
+            vm.Images = Directory.GetFiles(HostingEnvironment.MapPath("~/Content/Drawables/")).Select(x => x.Split('.')[0]).Select(x => x.Substring(x.LastIndexOf('\\') + 1, x.Length - x.LastIndexOf('\\') - 1)).ToList();
+
+            List<String> images = new List<string>();
+            for (int i = 0; i < vm.Images.Count; i++)
+            {
+                var image = vm.Images.ElementAt(i);
+                images.Add(ClassUtil.ImgPath(vm.Images.ElementAt(i)));
+            }
+
+            vm.Images = images;
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult Printables(PrintableUpdateVM item)
+        {
+            switch (item.Type)
+            {
+                case 1:
+                    var resources = db.Resources.Where(x => x.Name == item.Name).ToList();
+                    foreach (var resource in resources)
+                    {
+                        resource.Print = item.Print;
+                    }
+                    db.SaveChanges();
+                    break;
+                case 2:
+                    var resourceGenerators = db.Buildings.Where(x => x.Name == item.Name).OfType<ResourceGenerator>().ToList();
+                    foreach (var resourceGenerator in resourceGenerators)
+                    {
+                        resourceGenerator.Print = item.Print;
+                    }
+                    db.SaveChanges();
+                    break;
+                default:
+                    break;
+            }
+
+            return RedirectToRoute("Default");
         }
     }
 }

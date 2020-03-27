@@ -42,6 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparers\ResourceComparer.cs" />
+    <Compile Include="Comparers\ResourceGeneratorComparer.cs" />
     <Compile Include="Entities\Building.cs" />
     <Compile Include="Annotations\EnumNamingAttribute.cs" />
     <Compile Include="Entities\ConcretBuildings\ConcretBaseBuilding.cs" />

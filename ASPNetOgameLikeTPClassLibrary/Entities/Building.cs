@@ -36,7 +36,17 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
         public String Print
         {
             get { return print; }
-            set { print = ClassUtil.ImgPath(value); }
+            set
+            {
+                if (value != null && !value.StartsWith("~"))
+                {
+                    print = ClassUtil.ImgPath(value);
+                }
+                else
+                {
+                    print = value;
+                }
+            }
         }
 
         [NotMapped]

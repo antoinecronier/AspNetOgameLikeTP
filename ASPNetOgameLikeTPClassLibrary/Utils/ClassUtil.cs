@@ -32,6 +32,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Utils
             ResourceGenerator result = new ResourceGenerator();
             result.Level = item.Level;
             result.Name = item.Name;
+            result.Print = item.Print;
             result.OxygenCostFuncString = item.OxygenCostFuncString;
             result.OxygenGenFuncString = item.OxygenGenFuncString;
             result.SteelCostFuncString = item.SteelCostFuncString;
@@ -48,6 +49,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Utils
         {
             Resource result = new Resource();
             result.Name = item.Name;
+            result.Print = item.Print;
             result.LastUpdate = item.LastUpdate;
             result.LastQuantity = item.LastQuantity;
 

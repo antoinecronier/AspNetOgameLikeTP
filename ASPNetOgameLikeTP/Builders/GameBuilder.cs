@@ -50,7 +50,7 @@ namespace ASPNetOgameLikeTP.Builders
                         foreach (var item in this.globalPlanetConfiguration.BuildingsIds)
                         {
                             ResourceGenerator buildingTemp = ConfigurationsUtil.Instance.PlanetResourceGenerators(globalPlanetConfiguration).ElementAt(item);
-
+                            buildingTemp.Print = "Planet";
                             planet.Buildings.Add(ClassUtil.Copy(buildingTemp));
                         }
 
@@ -59,6 +59,7 @@ namespace ASPNetOgameLikeTP.Builders
                             Resource resourceTemp = ConfigurationsUtil.Instance.PlanetResources(globalPlanetConfiguration).ElementAt(item);
                             resourceTemp.LastUpdate = DateTime.Now;
                             resourceTemp.LastQuantity = 0;
+                            resourceTemp.Print = "Planet";
                             planet.Resources.Add(ClassUtil.Copy(resourceTemp));
                         }
 

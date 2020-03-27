@@ -1,0 +1,69 @@
+﻿@model ASPNetOgameLikeTP.Models.PrintableVM
+
+@{
+    ViewBag.Title = "Printables";
+}
+
+<h2>Printables</h2>
+<h3>Ressources</h3>
+<div class="row">
+    @foreach (var item in Model.Resources)
+    {
+        <div class="col-md-4">
+            <div class="row">
+                <b>@Html.DisplayFor(x => item.Name)</b>
+            </div>
+            <div class="row">
+                <img src="@Url.Content(item.Print)" />
+            </div>
+            <div class="row">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(resource => item.Id, htmlAttributes: new { @Name = "Id" })
+                    @Html.HiddenFor(resource => item.Name, htmlAttributes: new { @Name = "Name" })
+                    <input type="hidden" name="Type" value="1" />
+                    @Html.DropDownListFor(resource => item.Print, Model.Images.Select(x => new SelectListItem { Text = x, Value = x, Selected = x == item.Print }), htmlAttributes: new { @class = "form-control", @Name = "Print" })
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Changer" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+<h3>Générateur de ressources</h3>
+<div class="row">
+    @foreach (var item in Model.ResourceGenerators)
+    {
+        <div class="col-md-4">
+            <div class="row">
+                <b>@Html.DisplayFor(x => item.Name)</b>
+            </div>
+            <div class="row">
+                <img src="@Url.Content(item.Print)" />
+            </div>
+            <div class="row">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(resource => item.Id, htmlAttributes: new { @Name = "Id" })
+                    @Html.HiddenFor(resource => item.Name, htmlAttributes: new { @Name = "Name" })
+                    <input type="hidden" name="Type" value="2" />
+                    @Html.DropDownListFor(resource => item.Print, Model.Images.Select(x => new SelectListItem { Text = x, Value = x, Selected = x == item.Print }), htmlAttributes: new { @class = "form-control", @Name = "Print" })
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Changer" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

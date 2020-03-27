@@ -44,6 +44,7 @@ namespace ASPNetOgameLikeTP.Utils
             foreach (var buildingId in globalPlanetConfiguration.BuildingsIds)
             {
                 var data = Configuration.ResourceGenerators.ElementAt(buildingId);
+                data.Print = "Planet";
                 if (data.Level == null)
                 {
                     data.Level = 0;
@@ -60,6 +61,7 @@ namespace ASPNetOgameLikeTP.Utils
             foreach (var resourceId in globalPlanetConfiguration.ResourcesIds)
             {
                 var data = Configuration.Resources.ElementAt(resourceId);
+                data.Print = "Planet";
                 if (data.LastQuantity == null)
                 {
                     data.LastQuantity = 0;
