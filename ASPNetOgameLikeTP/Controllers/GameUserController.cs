@@ -56,20 +56,18 @@ namespace ASPNetOgameLikeTP.Controllers
             }
         }
 
-        public ActionResult UpgradeBuilding(ResourceGenerator building)
+        public void UpgradeBuilding(long? buildingId)
         {
-            if (ModelState.IsValid)
+            if (buildingId != null)
             {
                 using (var db = new ASPNetOgameLikeTPContext())
                 {
-                    db.Buildings.Attach(building);
+                    var building = db.Buildings.Find(buildingId);
                     building.Level += 1;
                     db.Entry(building).State = EntityState.Modified;
                     db.SaveChanges();
                 }
             }
-            return View();
-            //return PartialView("~/Views/GameUser/GameUserTopHeadband.cshtml", vm);
         }
 
         [ChildActionOnly]
