@@ -36,6 +36,7 @@ namespace ASPNetOgameLikeTP.Controllers
                 ss.Planets.Add(new PlanetBuilder().Name("planet " + i).Build());
             }
             vm.PrincipalPlanet = new PlanetBuilder().Name("Principale").Build();
+            vm.PrincipalPlanet.Buildings.Add(new ResourceGenerator { Name = "batiment X", Print = "Planet" });
             ss.Planets.Add(vm.PrincipalPlanet);
 
             vm.SolarSystem = ss;
@@ -56,7 +57,7 @@ namespace ASPNetOgameLikeTP.Controllers
             }
         }
 
-        public void UpgradeBuilding(long? buildingId)
+        public ActionResult UpgradeBuilding(long? buildingId)
         {
             if (buildingId != null)
             {
@@ -68,6 +69,8 @@ namespace ASPNetOgameLikeTP.Controllers
                     db.SaveChanges();
                 }
             }
+
+            return RedirectToAction("GameUserView");
         }
 
         [ChildActionOnly]

@@ -49,17 +49,19 @@ namespace ASPNetOgameLikeTP.Builders
 
                         foreach (var item in this.globalPlanetConfiguration.BuildingsIds)
                         {
-                            ResourceGenerator buildingTemp = ConfigurationsUtil.Instance.PlanetResourceGenerators(globalPlanetConfiguration).ElementAt(item);
+                            ResourceGenerator buildingTemp = ConfigurationsUtil.Instance.PlanetResourceGenerators(globalPlanetConfiguration).FirstOrDefault(x => x.Id == item);
                             buildingTemp.Print = "Planet";
+                            buildingTemp.Id = null;
                             planet.Buildings.Add(ClassUtil.Copy(buildingTemp));
                         }
 
                         foreach (var item in this.globalPlanetConfiguration.ResourcesIds)
                         {
-                            Resource resourceTemp = ConfigurationsUtil.Instance.PlanetResources(globalPlanetConfiguration).ElementAt(item);
+                            Resource resourceTemp = ConfigurationsUtil.Instance.PlanetResources(globalPlanetConfiguration).FirstOrDefault(x => x.Id == item);
                             resourceTemp.LastUpdate = DateTime.Now;
                             resourceTemp.LastQuantity = 0;
                             resourceTemp.Print = "Planet";
+                            resourceTemp.Id = null;
                             planet.Resources.Add(ClassUtil.Copy(resourceTemp));
                         }
 

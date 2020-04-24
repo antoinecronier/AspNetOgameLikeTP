@@ -1,18 +1,18 @@
 ﻿@model ASPNetOgameLikeTPClassLibrary.Entities.Building
 
-    <div class="row">
-        @Html.DisplayFor(x => Model.Name)
-    </div>
-
-    <div class="row">
-        Niveau @Html.DisplayFor(x => Model.Level)
-    </div>
-
 <div class="row">
-    <img src="@Url.Content(@Model.Print)" style="max-width:120px"/>
+    @Html.DisplayFor(x => Model.Name)
 </div>
 
 <div class="row">
-    @Html.ActionLink("Augmenter niveau " + (Model.Level + 1), "UpgradeBuilding", "GameUser", new { buildingId = Model.Id})
+    Niveau @Html.DisplayFor(x => Model.Level)
+</div>
+
+<div class="row">
+    <img src="@Url.Content(@Model.Print)" style="max-width:120px" />
+</div>
+
+<div class="row">
+    @Html.ActionLink("Augmenter niveau " + (Model.Level + 1), "UpgradeBuilding", "GameUser", new { buildingId = Model.Id })
 </div>
 

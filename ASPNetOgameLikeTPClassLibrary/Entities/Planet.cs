@@ -36,7 +36,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
             set { caseNb = value; }
         }
 
-        [PlanetResourcesValidator]
+        //[PlanetResourcesValidator]
         public virtual List<Resource> Resources
         {
             get { return resources; }

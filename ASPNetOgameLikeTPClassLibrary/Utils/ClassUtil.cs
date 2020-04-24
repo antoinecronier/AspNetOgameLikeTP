@@ -30,6 +30,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Utils
         public static ResourceGenerator Copy(ResourceGenerator item)
         {
             ResourceGenerator result = new ResourceGenerator();
+            result.Id = item.Id;
             result.Level = item.Level;
             result.Name = item.Name;
             result.Print = item.Print;
@@ -48,6 +49,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Utils
         public static Resource Copy(Resource item)
         {
             Resource result = new Resource();
+            result.Id = item.Id;
             result.Name = item.Name;
             result.Print = item.Print;
             result.LastUpdate = item.LastUpdate;
