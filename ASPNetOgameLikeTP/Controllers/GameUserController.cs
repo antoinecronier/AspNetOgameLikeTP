@@ -17,7 +17,7 @@ namespace ASPNetOgameLikeTP.Controllers
         private static GameUserVM vm = new GameUserVM();
         public ActionResult GameUserView(/*GameUserVM vm*/)
         {
-            if (vm.PrincipalPlanet == null || vm.SolarSystem == null)
+            if (vm.PrincipalPlanet == null || vm.Universe == null)
             {
                 InitFakeDatas(vm);
             }
@@ -27,31 +27,21 @@ namespace ASPNetOgameLikeTP.Controllers
 
         private static void InitFakeDatas(GameUserVM vm)
         {
-            SolarSystem ss = new SolarSystem();
-            ss.Name = "system solaire 1";
-            for (int i = 1; i < 10; i++)
-            {
-                ss.Planets.Add(new PlanetBuilder().Name("planet " + i).Build());
-            }
-            vm.PrincipalPlanet = new PlanetBuilder().Name("Principale").Build();
-            vm.PrincipalPlanet.Buildings.Add(new ResourceGenerator { Name = "batiment X", Print = "Planet" });
-            ss.Planets.Add(vm.PrincipalPlanet);
-
-            vm.SolarSystem = ss;
-
             try
             {
                 using (var db = new ASPNetOgameLikeTPContext())
                 {
-                    db.SolarSystems.Add(ss);
-                    db.SaveChanges();
+                    Universe universe = db.Universes
+                        .Include(x => x.SolarSystems.Select(y => y.Planets.Select(p => p.Resources)))
+                        .Include(x => x.SolarSystems.Select(y => y.Planets.Select(p => p.Buildings)))
+                        .FirstOrDefault();
+                    vm.Universe = universe;
+                    vm.PrincipalPlanet = universe.SolarSystems.SelectMany(y => y.Planets).FirstOrDefault();
                 }
             }
-            catch (DbEntityValidationException ex)
+            catch (Exception ex)
             {
-                var error = ex.EntityValidationErrors.First().ValidationErrors.First();
-                Console.WriteLine("error : " + error.PropertyName);
-                Console.WriteLine("message : " + error.ErrorMessage);
+                Console.WriteLine(ex.StackTrace);
             }
         }
 
@@ -65,7 +55,7 @@ namespace ASPNetOgameLikeTP.Controllers
                     building.Level += 1;
                     db.Entry(building).State = EntityState.Modified;
                     db.SaveChanges();
-                    vm.SolarSystem.Planets.SelectMany(x => x.Buildings).FirstOrDefault(x => x.Id == buildingId).Level++;
+                    vm.Universe.SolarSystems.SelectMany(x => x.Planets).SelectMany(x => x.Buildings).FirstOrDefault(x => x.Id == buildingId).Level++;
                 }
             }
 

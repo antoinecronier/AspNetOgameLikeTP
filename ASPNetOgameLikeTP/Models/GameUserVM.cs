@@ -10,6 +10,6 @@ namespace ASPNetOgameLikeTP.Models
     {
         public Planet PrincipalPlanet { get; set; }
 
-        public SolarSystem SolarSystem { get; set; }
+        public Universe Universe { get; set; }
     }
 }

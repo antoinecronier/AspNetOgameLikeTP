@@ -2,11 +2,11 @@
 
 <div class="row">
     <div class="col-md-12" style="text-align:center">
-        @Html.DisplayFor(model => model.SolarSystem.Name)
+        @Html.DisplayFor(model => model.Universe.SolarSystems.FirstOrDefault().Name)
     </div>
 </div>
 @{ int i = 1;}
-@foreach (var item in Model.SolarSystem.Planets)
+@foreach (var item in Model.Universe.SolarSystems.FirstOrDefault(x => x.Planets.Contains(Model.PrincipalPlanet)).Planets)
 {
     <div class="row">
         <div class="col-md-1" style="text-align:center">
@@ -20,5 +20,3 @@
 
     i++;
 }
-
-

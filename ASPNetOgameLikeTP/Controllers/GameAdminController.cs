@@ -93,14 +93,14 @@ namespace ASPNetOgameLikeTP.Controllers
                 db.SaveChanges();
 
                 GameBuilder builder = new GameBuilder();
-                List<SolarSystem> solarSystems = builder.AddGlobalGameConfiguration(vm.GlobalGameConfiguration).AddPlanetsOnSolarSystem(vm.GlobalPlanetConfiguration).BuildAll();
+                Universe universe = builder.AddGlobalGameConfiguration(vm.GlobalGameConfiguration).AddPlanetsOnSolarSystem(vm.GlobalPlanetConfiguration).BuildUniverse();
 
-                if (ValidationUtil.ValidateObject(solarSystems))
+                if (ValidationUtil.ValidateObject(universe))
                 {
                     try
                     {
                         db.ClearDatabase();
-                        db.SolarSystems.AddRange(solarSystems);
+                        db.Universes.Add(universe);
                         db.SaveChanges();
                     }
                     catch (DbEntityValidationException ex)

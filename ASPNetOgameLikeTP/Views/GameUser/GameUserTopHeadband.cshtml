@@ -5,7 +5,7 @@
         @Html.ActionLink("Précédent", "GameUserView", "GameUser", new { vm = Model })
     </div>
     <div class="col-md-4" style="text-align:center">
-        @Html.DisplayFor(model => model.SolarSystem.Name)
+        @Html.DisplayFor(model => Model.Universe.SolarSystems.FirstOrDefault(x => x.Planets.Contains(Model.PrincipalPlanet)).Name)
     </div>
     <div class="col-md-4" style="text-align:center">
         @Html.ActionLink("Suivant", "GameUserView", "GameUser", new { vm = Model })

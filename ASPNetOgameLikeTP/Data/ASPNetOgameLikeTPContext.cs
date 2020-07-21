@@ -14,9 +14,13 @@ namespace ASPNetOgameLikeTP.Data
         // automatically whenever you change your model schema, please use data migrations.
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
-    
+
         public ASPNetOgameLikeTPContext() : base("name=ASPNetOgameLikeTPContext")
         {
+            //if (this.Database.Exists())
+            //{
+            //    ClearDatabase();
+            //}
         }
 
         public System.Data.Entity.DbSet<ASPNetOgameLikeTPClassLibrary.Entities.Universe> Universes { get; set; }
@@ -33,17 +37,14 @@ namespace ASPNetOgameLikeTP.Data
 
         public void ClearDatabase()
         {
-            using (var db = new ASPNetOgameLikeTPContext())
-            {
-                db.Buildings.RemoveRange(db.Buildings);
-                //db.Configurations.RemoveRange(db.Configurations);
-                db.Planets.RemoveRange(db.Planets);
-                db.Resources.RemoveRange(db.Resources);
-                db.SolarSystems.RemoveRange(db.SolarSystems);
-                db.Universes.RemoveRange(db.Universes);
+            this.Buildings.RemoveRange(this.Buildings);
+            //this.Configurations.RemoveRange(this.Configurations);
+            this.Planets.RemoveRange(this.Planets);
+            this.Resources.RemoveRange(this.Resources);
+            this.SolarSystems.RemoveRange(this.SolarSystems);
+            this.Universes.RemoveRange(this.Universes);
 
-                db.SaveChanges();
-            }
+            this.SaveChanges();
         }
     }
 }
