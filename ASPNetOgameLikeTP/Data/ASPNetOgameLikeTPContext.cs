@@ -19,6 +19,8 @@ namespace ASPNetOgameLikeTP.Data
         {
         }
 
+        public System.Data.Entity.DbSet<ASPNetOgameLikeTPClassLibrary.Entities.Universe> Universes { get; set; }
+
         public System.Data.Entity.DbSet<ASPNetOgameLikeTPClassLibrary.Entities.SolarSystem> SolarSystems { get; set; }
 
         public System.Data.Entity.DbSet<ASPNetOgameLikeTPClassLibrary.Entities.Planet> Planets { get; set; }
@@ -38,6 +40,7 @@ namespace ASPNetOgameLikeTP.Data
                 db.Planets.RemoveRange(db.Planets);
                 db.Resources.RemoveRange(db.Resources);
                 db.SolarSystems.RemoveRange(db.SolarSystems);
+                db.Universes.RemoveRange(db.Universes);
 
                 db.SaveChanges();
             }

@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 
 namespace ASPNetOgameLikeTPClassLibrary.Entities
 {
-    public class SolarSystem : IDbEntity
+    public class Universe : IDbEntity
     {
 		#region Private class variable
 		private long? id;
 		private String name;
-		private List<Planet> planets;
+		private List<SolarSystem> solarSystems;
 		#endregion
 
 		#region Properties
-		[StringLength(20,MinimumLength = 5)]
+		[StringLength(20, MinimumLength = 5)]
 		public String Name
 		{
 			get { return name; }
 			set { name = value; }
 		}
 
-		public virtual List<Planet> Planets
+		public virtual List<SolarSystem> SolarSystems
 		{
-			get { return planets; }
+			get { return solarSystems; }
 		}
 		#endregion
 
@@ -34,9 +34,9 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
 		#endregion
 
 		#region Constructors
-		public SolarSystem()
+		public Universe()
 		{
-			this.planets = new List<Planet>();
+			this.solarSystems = new List<SolarSystem>();
 		}
 		#endregion
 	}

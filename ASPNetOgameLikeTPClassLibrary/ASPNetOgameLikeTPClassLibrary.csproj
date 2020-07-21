@@ -60,6 +60,7 @@
     <Compile Include="Entities\ResourceGenerator.cs" />
     <Compile Include="Entities\ResourceNames.cs" />
     <Compile Include="Entities\SolarSystem.cs" />
+    <Compile Include="Entities\Universe.cs" />
     <Compile Include="Extensions\EnumNamingExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ClassUtil.cs" />
