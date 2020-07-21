@@ -14,11 +14,11 @@ namespace ASPNetOgameLikeTP.Controllers
 {
     public class GameUserController : Controller
     {
-        public ActionResult GameUserView(GameUserVM vm)
+        private static GameUserVM vm = new GameUserVM();
+        public ActionResult GameUserView(/*GameUserVM vm*/)
         {
             if (vm.PrincipalPlanet == null || vm.SolarSystem == null)
             {
-                vm = new GameUserVM();
                 InitFakeDatas(vm);
             }
 
@@ -55,7 +55,7 @@ namespace ASPNetOgameLikeTP.Controllers
             }
         }
 
-        public ActionResult UpgradeBuilding(long? buildingId, GameUserVM vm)
+        public ActionResult UpgradeBuilding(long? buildingId)
         {
             if (buildingId != null)
             {
@@ -65,10 +65,11 @@ namespace ASPNetOgameLikeTP.Controllers
                     building.Level += 1;
                     db.Entry(building).State = EntityState.Modified;
                     db.SaveChanges();
+                    vm.SolarSystem.Planets.SelectMany(x => x.Buildings).FirstOrDefault(x => x.Id == buildingId).Level++;
                 }
             }
 
-            return RedirectToAction("GameUserView", vm);
+            return RedirectToAction("GameUserView");
         }
 
         [ChildActionOnly]
