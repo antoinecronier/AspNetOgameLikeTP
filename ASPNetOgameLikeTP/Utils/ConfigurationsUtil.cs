@@ -18,6 +18,8 @@ namespace ASPNetOgameLikeTP.Utils
         private ConfigurationsUtil()
         {
             Configuration = JsonConvert.DeserializeObject<GameConfiguration>(FileUtil.ReadServerFile("~/Content/Configurations/GameConfigurations.txt"));
+            ClassUtil.IdsUpdater(Configuration.ResourceGenerators);
+            ClassUtil.IdsUpdater(Configuration.Resources);
         }
 
         public static ConfigurationsUtil Instance
