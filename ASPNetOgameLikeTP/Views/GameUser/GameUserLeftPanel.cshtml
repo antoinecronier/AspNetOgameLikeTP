@@ -14,7 +14,7 @@
         </div>
         <img class="col-md-4" style="text-align:center" src="@Url.Content(@Model.PrincipalPlanet.Print)" />
         <div class="col-md-5" style="text-align:center">
-            @Html.DisplayFor(x => item.Name)
+            @Html.ActionLink(item.Name, "ChangePlanet", "GameUser", new { planetId = item.Id }, null)
         </div>
     </div>
 

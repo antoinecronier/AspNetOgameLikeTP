@@ -1,13 +1,22 @@
 ﻿@model ASPNetOgameLikeTP.Models.GameUserVM
 
+@{ 
+    var solarSystem = Model.Universe.SolarSystems.FirstOrDefault(x => x.Planets.Contains(Model.PrincipalPlanet));
+}
 <div class="row">
     <div class="col-md-4" style="text-align:center">
-        @Html.ActionLink("Précédent", "GameUserView", "GameUser", new { vm = Model })
+        @if (!Model.Universe.SolarSystems.ElementAt(0).Equals(solarSystem))
+        {
+            @Html.ActionLink("Précédent", "PreviousSolarSystem", "GameUser", new { solarSystemId = solarSystem.Id }, null)
+        }
     </div>
     <div class="col-md-4" style="text-align:center">
-        @Html.DisplayFor(model => Model.Universe.SolarSystems.FirstOrDefault(x => x.Planets.Contains(Model.PrincipalPlanet)).Name)
+        @Html.DisplayFor(model => solarSystem.Name)
     </div>
     <div class="col-md-4" style="text-align:center">
-        @Html.ActionLink("Suivant", "GameUserView", "GameUser", new { vm = Model })
+        @if (!Model.Universe.SolarSystems.Last().Equals(solarSystem))
+        {
+            @Html.ActionLink("Suivant", "NextSolarSystem", "GameUser", new { solarSystemId = solarSystem.Id }, null)
+        }
     </div>
 </div>
