@@ -15,9 +15,9 @@ namespace ASPNetOgameLikeTP.Controllers
     public class GameUserController : Controller
     {
         private static GameUserVM vm = new GameUserVM();
-        public ActionResult GameUserView(/*GameUserVM vm*/)
+        public ActionResult GameUserView(GameUserVM vm)
         {
-            if (vm.PrincipalPlanet == null || vm.Universe == null)
+            if (vm == null || vm.PrincipalPlanet == null || vm.Universe == null)
             {
                 InitFakeDatas(GameUserController.vm);
             }
@@ -47,11 +47,12 @@ namespace ASPNetOgameLikeTP.Controllers
 
         public ActionResult UpgradeBuilding(long? buildingId)
         {
+            Building building = null;
             if (buildingId != null)
             {
                 using (var db = new ASPNetOgameLikeTPContext())
                 {
-                    var building = db.Buildings.Find(buildingId);
+                    building = db.Buildings.Find(buildingId);
                     building.Level += 1;
                     db.Entry(building).State = EntityState.Modified;
                     db.SaveChanges();
@@ -59,30 +60,37 @@ namespace ASPNetOgameLikeTP.Controllers
                 }
             }
 
-            return RedirectToAction("GameUserView");
+            return PartialView("~/Views/GameUser/GameUserBuilding.cshtml", building);
+        }
+
+        public ActionResult GetPageContent()
+        {
+            return PartialView("GameUserPageContent", GameUserController.vm);
         }
 
         public ActionResult ChangePlanet(int planetId)
         {
             GameUserController.vm.PrincipalPlanet = GameUserController.vm.Universe.SolarSystems.SelectMany(y => y.Planets).FirstOrDefault(x => x.Id == planetId);
 
-            return RedirectToAction("GameUserView");
+            return PartialView("GameUserContent", GameUserController.vm);
         }
+
         public ActionResult PreviousSolarSystem(int solarSystemId)
         {
             SolarSystem ss = GameUserController.vm.Universe.SolarSystems.FirstOrDefault(x => x.Id == solarSystemId);
             int position = GameUserController.vm.Universe.SolarSystems.IndexOf(ss);
             GameUserController.vm.PrincipalPlanet = GameUserController.vm.Universe.SolarSystems.ElementAt(position - 1).Planets.FirstOrDefault();
 
-            return RedirectToAction("GameUserView");
+            return PartialView("GameUserPageContent", GameUserController.vm);
         }
+
         public ActionResult NextSolarSystem(int solarSystemId)
         {
             SolarSystem ss = GameUserController.vm.Universe.SolarSystems.FirstOrDefault(x => x.Id == solarSystemId);
             int position = GameUserController.vm.Universe.SolarSystems.IndexOf(ss);
             GameUserController.vm.PrincipalPlanet = GameUserController.vm.Universe.SolarSystems.ElementAt(position + 1).Planets.FirstOrDefault();
 
-            return RedirectToAction("GameUserView");
+            return PartialView("GameUserPageContent", GameUserController.vm);
         }
 
         [ChildActionOnly]

@@ -7,7 +7,13 @@
     <div class="col-md-4" style="text-align:center">
         @if (!Model.Universe.SolarSystems.ElementAt(0).Equals(solarSystem))
         {
-            @Html.ActionLink("Précédent", "PreviousSolarSystem", "GameUser", new { solarSystemId = solarSystem.Id }, null)
+            @Ajax.ActionLink("Précédent", "PreviousSolarSystem", "GameUser", new { solarSystemId = solarSystem.Id }, new AjaxOptions()
+            {
+                HttpMethod = "GET",
+                AllowCache = false,
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "pageContent",
+            })
         }
     </div>
     <div class="col-md-4" style="text-align:center">
@@ -16,7 +22,13 @@
     <div class="col-md-4" style="text-align:center">
         @if (!Model.Universe.SolarSystems.Last().Equals(solarSystem))
         {
-            @Html.ActionLink("Suivant", "NextSolarSystem", "GameUser", new { solarSystemId = solarSystem.Id }, null)
+            @Ajax.ActionLink("Suivant", "NextSolarSystem", "GameUser", new { solarSystemId = solarSystem.Id }, new AjaxOptions()
+            {
+                HttpMethod = "GET",
+                AllowCache = false,
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "pageContent",
+            })
         }
     </div>
 </div>

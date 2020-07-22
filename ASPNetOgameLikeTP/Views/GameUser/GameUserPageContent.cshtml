@@ -1,0 +1,13 @@
+﻿@model ASPNetOgameLikeTP.Models.GameUserVM
+
+<div class="col-md-12" id="headBand">
+    @Html.Action("GetHeadband", "GameUser", new { vm = Model })
+</div>
+<div class="row">
+    <div class="col-md-2" id="leftPanel">
+        @Html.Action("GetLeftPanel", "GameUser", new { vm = Model })
+    </div>
+    <div class="col-md-10" id="content">
+        @Html.Action("GetContent", "GameUser", new { vm = Model })
+    </div>
+</div>

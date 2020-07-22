@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-md-5" style="text-align:center">
-        <img class="col-md-5" style="text-align:center" src="@Url.Content(@Model.PrincipalPlanet.Print)"/>
+        <img class="col-md-5" style="text-align:center" src="@Url.Content(@Model.PrincipalPlanet.Print)" />
         <div class="col-md-5" style="text-align:left">
             @Html.DisplayFor(x => Model.PrincipalPlanet.Name)
         </div>
@@ -13,12 +13,14 @@
 </div>
 
 <div class="row">
+    @{
+        foreach (var item in Model.PrincipalPlanet.Buildings)
+        {
+            string buildingHTMLId = "building" + item.Id;
 
-    @foreach (var item in Model.PrincipalPlanet.Buildings)
-    {
-        <div class="col-md-3" style="text-align:center">
-            @Html.Action("GetBuilding", "GameUser", new { building = item, vm = Model })
-        </div>
+            <div class="col-md-3" style="text-align:center" id="@buildingHTMLId">
+                @Html.Action("GetBuilding", "GameUser", new { building = item, vm = Model })
+            </div>
+        }
     }
-
 </div>

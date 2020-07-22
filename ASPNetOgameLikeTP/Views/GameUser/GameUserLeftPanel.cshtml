@@ -14,7 +14,13 @@
         </div>
         <img class="col-md-4" style="text-align:center" src="@Url.Content(@Model.PrincipalPlanet.Print)" />
         <div class="col-md-5" style="text-align:center">
-            @Html.ActionLink(item.Name, "ChangePlanet", "GameUser", new { planetId = item.Id }, null)
+            @Ajax.ActionLink(item.Name, "ChangePlanet", new { planetId = item.Id }, new AjaxOptions()
+            {
+                HttpMethod = "GET",
+                AllowCache = false,
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "content",
+            })
         </div>
     </div>
 

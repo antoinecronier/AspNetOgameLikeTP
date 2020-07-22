@@ -6,16 +6,6 @@
 
 <h2>GameUserView</h2>
 
-<div class="row">
-    <div class="col-md-12">
-        @Html.Action("GetHeadband", "GameUser", new { vm = Model })
-    </div>
-    <div class="row">
-        <div class="col-md-2">
-            @Html.Action("GetLeftPanel", "GameUser", new { vm = Model })
-        </div>
-        <div class="col-md-10">
-            @Html.Action("GetContent", "GameUser", new { vm = Model })
-        </div>
-    </div>
+<div class="row" id="pageContent">
+    @Html.Action("GetPageContent", "GameUser")
 </div>
