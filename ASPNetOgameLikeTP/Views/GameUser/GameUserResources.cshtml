@@ -3,7 +3,7 @@
 @foreach (var item in Model)
 {
     <div class="row">
-        <img class="col-md-3" src="@Url.Content(@item.Print)"/>
+        <img class="col-md-3" src="@Url.Content(@item.Print)" />
         <div class="col-md-3" style="text-align:center">
             @Html.DisplayFor(x => item.Name)
         </div>
@@ -13,3 +13,10 @@
     </div>
 }
 
+@Ajax.BeginForm("GetResources", "GameUser", new AjaxOptions()
+{
+HttpMethod = "GET",
+AllowCache = false,
+InsertionMode = InsertionMode.Replace,
+UpdateTargetId = "contentResources",
+}, new { @id = "reloadResources", @style = "display:none" })

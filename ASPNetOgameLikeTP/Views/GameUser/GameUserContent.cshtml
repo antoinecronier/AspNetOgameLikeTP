@@ -7,7 +7,7 @@
             @Html.DisplayFor(x => Model.PrincipalPlanet.Name)
         </div>
     </div>
-    <div class="col-md-5" style="text-align:center">
+    <div class="col-md-5" style="text-align:center" id="contentResources">
         @Html.Action("GetResources", "GameUser", new { resources = Model.PrincipalPlanet.Resources })
     </div>
 </div>

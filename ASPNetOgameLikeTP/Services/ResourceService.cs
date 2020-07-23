@@ -23,14 +23,7 @@ namespace ASPNetOgameLikeTP.Services
                 if (building is ResourceGenerator)
                 {
                     var resourceGenerator = building as ResourceGenerator;
-
-                    // Apply configuration to resource generator
-                    using (var db = new ASPNetOgameLikeTPContext())
-                    {
-                        var resPlanetConf = db.Configurations.Find(ConfigurationKeys.GlobalPlanetConfiguration.GetName());
-                        var planetConf = JsonConvert.DeserializeObject<GlobalPlanetConfiguration>(resPlanetConf.Data);
-                        ConfigurationsUtil.Instance.LoadResourceGeneratorConf(planetConf, resourceGenerator);
-                    }
+                    this.ApplyResourceConfigurations(resourceGenerator);
 
                     foreach (var resource in resourceGenerator.ResourceBySecond)
                     {
@@ -55,13 +48,59 @@ namespace ASPNetOgameLikeTP.Services
                 foreach (var resource in vm.PrincipalPlanet.Resources)
                 {
                     resource.LastQuantity = resource.LastQuantity + resourcesGenerate.FirstOrDefault(x => x.Name.Equals(resource.Name)).LastQuantity;
-                    resource.LastUpdate = DateTime.Now;
-
-                    db.Resources.Attach(resource);
-                    db.Entry(resource).State = EntityState.Modified;
-
-                    db.SaveChanges();
+                    this.SaveResource(db, resource);
                 }
+            }
+        }
+
+        public bool BuyIt(GameUserVM vm, Building building)
+        {
+            bool result = true;
+
+            this.ApplyResourceConfigurations(building);
+            foreach (var resource in building.NextCost)
+            {
+                var realResource = vm.PrincipalPlanet.Resources.FirstOrDefault(x => x.Name.Equals(resource.Name));
+                if (resource.LastQuantity > realResource.LastQuantity)
+                {
+                    result = false;
+                }
+            }
+
+            if (result)
+            {
+                using (var db = new ASPNetOgameLikeTPContext())
+                {
+                    foreach (var resource in building.NextCost)
+                    {
+                        var realResource = vm.PrincipalPlanet.Resources.FirstOrDefault(x => x.Name.Equals(resource.Name));
+                        realResource.LastQuantity = realResource.LastQuantity - resource.LastQuantity;
+                        this.SaveResource(db, realResource);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private void SaveResource(ASPNetOgameLikeTPContext db, Resource resource)
+        {
+            resource.LastUpdate = DateTime.Now;
+
+            db.Resources.Attach(resource);
+            db.Entry(resource).State = EntityState.Modified;
+
+            db.SaveChanges();
+        }
+
+        private void ApplyResourceConfigurations(Building building)
+        {
+            // Apply configuration to resource generator
+            using (var db = new ASPNetOgameLikeTPContext())
+            {
+                var resPlanetConf = db.Configurations.Find(ConfigurationKeys.GlobalPlanetConfiguration.GetName());
+                var planetConf = JsonConvert.DeserializeObject<GlobalPlanetConfiguration>(resPlanetConf.Data);
+                ConfigurationsUtil.Instance.LoadBuildingConf(planetConf, building);
             }
         }
     }

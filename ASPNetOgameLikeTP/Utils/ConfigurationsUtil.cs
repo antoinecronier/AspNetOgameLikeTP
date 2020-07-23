@@ -76,6 +76,14 @@ namespace ASPNetOgameLikeTP.Utils
             }
         }
 
+        public void LoadBuildingConf(GlobalPlanetConfiguration globalPlanetConfiguration, Building building)
+        {
+            if (building is ResourceGenerator)
+            {
+                this.LoadResourceGeneratorConf(globalPlanetConfiguration, building as ResourceGenerator);
+            }
+        }
+
         public List<Resource> PlanetResources(GlobalPlanetConfiguration globalPlanetConfiguration)
         {
             List<Resource> result = new List<Resource>();

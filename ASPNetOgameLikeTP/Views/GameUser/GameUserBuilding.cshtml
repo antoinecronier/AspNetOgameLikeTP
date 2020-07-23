@@ -12,17 +12,18 @@
     <img src="@Url.Content(@Model.Print)" style="max-width:120px" />
 </div>
 
-@{ 
+@{
     string buildingHTMLId = "building" + Model.Id;
 }
 
 <div class="row">
     @Ajax.ActionLink("Augmenter niveau " + (Model.Level + 1), "UpgradeBuilding", "GameUser", new { buildingId = Model.Id }, new AjaxOptions()
-    {
-        HttpMethod = "GET",
-        AllowCache = false,
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = buildingHTMLId,
-    })
+{
+    HttpMethod = "GET",
+    AllowCache = false,
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = buildingHTMLId,
+    OnComplete = "reloadResources",
+})
 </div>
 
