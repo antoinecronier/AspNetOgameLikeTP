@@ -149,10 +149,10 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
             {
                 List<Resource> result = new List<Resource>()
                 {
-                    new Resource() { Name = ResourceNames.Energy.GetName(), LastUpdate = DateTime.Now, LastQuantity = energyCostFunc.Invoke(this.Level + 1) },
-                    new Resource() { Name = ResourceNames.Oxygen.GetName(), LastUpdate = DateTime.Now, LastQuantity = oxygenCostFunc.Invoke(this.Level + 1) },
-                    new Resource() { Name = ResourceNames.Steel.GetName(), LastUpdate = DateTime.Now, LastQuantity = steelCostFunc.Invoke(this.Level + 1) },
-                    new Resource() { Name = ResourceNames.Uranium.GetName(), LastUpdate = DateTime.Now, LastQuantity = uraniumCostFunc.Invoke(this.Level + 1) }
+                    new Resource() { Name = ResourceNames.Energy.GetName(), LastQuantity = energyCostFunc.Invoke(this.Level + 1) },
+                    new Resource() { Name = ResourceNames.Oxygen.GetName(), LastQuantity = oxygenCostFunc.Invoke(this.Level + 1) },
+                    new Resource() { Name = ResourceNames.Steel.GetName(), LastQuantity = steelCostFunc.Invoke(this.Level + 1) },
+                    new Resource() { Name = ResourceNames.Uranium.GetName(), LastQuantity = uraniumCostFunc.Invoke(this.Level + 1) }
                 };
 
                 return result;

@@ -57,6 +57,25 @@ namespace ASPNetOgameLikeTP.Utils
             return result;
         }
 
+        public void LoadResourceGeneratorConf(GlobalPlanetConfiguration globalPlanetConfiguration, ResourceGenerator generator)
+        {
+            foreach (var buildingId in globalPlanetConfiguration.BuildingsIds)
+            {
+                var data = Configuration.ResourceGenerators.FirstOrDefault(x => x.Id == buildingId);
+                if (data.Name.Equals(generator.Name))
+                {
+                    generator.OxygenCostFuncString = data.OxygenCostFuncString;
+                    generator.OxygenGenFuncString = data.OxygenGenFuncString;
+                    generator.SteelCostFuncString = data.SteelCostFuncString;
+                    generator.SteelGenFuncString = data.SteelGenFuncString;
+                    generator.UraniumCostFuncString = data.UraniumCostFuncString;
+                    generator.UraniumGenFuncString = data.UraniumGenFuncString;
+                    generator.EnergyCostFuncString = data.EnergyCostFuncString;
+                    generator.EnergyGenFuncString = data.EnergyGenFuncString;
+                }
+            }
+        }
+
         public List<Resource> PlanetResources(GlobalPlanetConfiguration globalPlanetConfiguration)
         {
             List<Resource> result = new List<Resource>();

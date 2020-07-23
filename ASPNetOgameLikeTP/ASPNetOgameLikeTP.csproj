@@ -175,6 +175,7 @@
     <Compile Include="Models\PrintableUpdateVM.cs" />
     <Compile Include="Models\PrintableVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ResourceService.cs" />
     <Compile Include="Utils\ConfigurationsUtil.cs" />
     <Compile Include="Utils\FileUtil.cs" />
     <Compile Include="Utils\ValidationUtil.cs" />

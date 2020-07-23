@@ -1,7 +1,11 @@
 ﻿using ASPNetOgameLikeTP.Builders;
 using ASPNetOgameLikeTP.Data;
 using ASPNetOgameLikeTP.Models;
+using ASPNetOgameLikeTP.Services;
+using ASPNetOgameLikeTP.Utils;
 using ASPNetOgameLikeTPClassLibrary.Entities;
+using ASPNetOgameLikeTPClassLibrary.Entities.Configurations;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,12 +19,15 @@ namespace ASPNetOgameLikeTP.Controllers
     public class GameUserController : Controller
     {
         private static GameUserVM vm = new GameUserVM();
+        private ResourceService resourceService = new ResourceService();
         public ActionResult GameUserView(GameUserVM vm)
         {
             if (vm == null || vm.PrincipalPlanet == null || vm.Universe == null)
             {
                 InitFakeDatas(GameUserController.vm);
             }
+
+            this.resourceService.RefreshResources(GameUserController.vm);
 
             return View(GameUserController.vm);
         }
@@ -58,6 +65,7 @@ namespace ASPNetOgameLikeTP.Controllers
                     db.SaveChanges();
                     vm.Universe.SolarSystems.SelectMany(x => x.Planets).SelectMany(x => x.Buildings).FirstOrDefault(x => x.Id == buildingId).Level++;
                 }
+                this.resourceService.RefreshResources(GameUserController.vm);
             }
 
             return PartialView("~/Views/GameUser/GameUserBuilding.cshtml", building);
@@ -71,6 +79,7 @@ namespace ASPNetOgameLikeTP.Controllers
         public ActionResult ChangePlanet(int planetId)
         {
             GameUserController.vm.PrincipalPlanet = GameUserController.vm.Universe.SolarSystems.SelectMany(y => y.Planets).FirstOrDefault(x => x.Id == planetId);
+            this.resourceService.RefreshResources(GameUserController.vm);
 
             return PartialView("GameUserContent", GameUserController.vm);
         }
@@ -80,6 +89,7 @@ namespace ASPNetOgameLikeTP.Controllers
             SolarSystem ss = GameUserController.vm.Universe.SolarSystems.FirstOrDefault(x => x.Id == solarSystemId);
             int position = GameUserController.vm.Universe.SolarSystems.IndexOf(ss);
             GameUserController.vm.PrincipalPlanet = GameUserController.vm.Universe.SolarSystems.ElementAt(position - 1).Planets.FirstOrDefault();
+            this.resourceService.RefreshResources(GameUserController.vm);
 
             return PartialView("GameUserPageContent", GameUserController.vm);
         }
@@ -89,6 +99,7 @@ namespace ASPNetOgameLikeTP.Controllers
             SolarSystem ss = GameUserController.vm.Universe.SolarSystems.FirstOrDefault(x => x.Id == solarSystemId);
             int position = GameUserController.vm.Universe.SolarSystems.IndexOf(ss);
             GameUserController.vm.PrincipalPlanet = GameUserController.vm.Universe.SolarSystems.ElementAt(position + 1).Planets.FirstOrDefault();
+            this.resourceService.RefreshResources(GameUserController.vm);
 
             return PartialView("GameUserPageContent", GameUserController.vm);
         }
