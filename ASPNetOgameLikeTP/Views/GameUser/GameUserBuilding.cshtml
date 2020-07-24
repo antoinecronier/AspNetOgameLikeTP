@@ -43,7 +43,7 @@
     AllowCache = false,
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = buildingHTMLId,
-    OnComplete = "upgradeBuilding" + Model.Id,
+    OnSuccess = "upgradeBuilding" + Model.Id,
 })
 </div>
 
@@ -67,10 +67,14 @@
 }
 <script type="text/javascript">
     @functionDeclaration
+    //Check if all are ok before substract
     @foreach (var resource in Model.NextCost)
     {
-        @:var @resource.Name = document.getElementById("res-" + @resource.Name + "-qty");
-        @:alert(@resource.Name);
+        @:var @resource.Name = document.getElementById("res-@resource.Name-qty")
+        @:if (@resource.Name .innerHTML >= @resource.LastQuantity)
+        @:{
+            @:@resource.Name .innerHTML = @resource.Name .innerHTML - @resource.LastQuantity;
+        @:}
     }
     }
 </script>

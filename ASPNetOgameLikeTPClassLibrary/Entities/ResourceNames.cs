@@ -9,11 +9,11 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
 {
     public enum ResourceNames
     {
-        [EnumNaming(Name = "énergie")]
+        [EnumNaming(Name = "energy")]
         Energy,
-        [EnumNaming(Name = "oxygène")]
+        [EnumNaming(Name = "oxygen")]
         Oxygen,
-        [EnumNaming(Name = "acier")]
+        [EnumNaming(Name = "steel")]
         Steel,
         [EnumNaming(Name = "uranium")]
         Uranium
