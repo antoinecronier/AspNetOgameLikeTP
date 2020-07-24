@@ -68,13 +68,23 @@
 <script type="text/javascript">
     @functionDeclaration
     //Check if all are ok before substract
-    @foreach (var resource in Model.NextCost)
-    {
-        @:var @resource.Name = document.getElementById("res-@resource.Name-qty")
-        @:if (@resource.Name .innerHTML >= @resource.LastQuantity)
-        @:{
-            @:@resource.Name .innerHTML = @resource.Name .innerHTML - @resource.LastQuantity;
-        @:}
-    }
+        var isOk = true;
+        @foreach (var resource in Model.NextCost)
+        {
+            @:var @resource.Name = document.getElementById("res-@resource.Name-qty")
+            @:if (@resource.Name .innerHTML < @resource.LastQuantity)
+            @:{
+                @:isOk = false;
+            @:}
+        }
+
+        if (isOk)
+        {
+            @foreach (var resource in Model.NextCost)
+            {
+                @:var @resource.Name = document.getElementById("res-@resource.Name-qty")
+                @:@resource.Name .innerHTML = @resource.Name .innerHTML - @resource.LastQuantity;
+            }
+        }
     }
 </script>
