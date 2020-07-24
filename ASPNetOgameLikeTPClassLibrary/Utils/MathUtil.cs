@@ -61,6 +61,14 @@ namespace ASPNetOgameLikeTPClassLibrary.Utils
             int? result = null;
 
             Random rand = new Random();
+
+            if (min > max)
+            {
+                var tmp = min;
+                min = max;
+                max = min;
+            }
+
             result = rand.Next(min, max);
 
             return result;

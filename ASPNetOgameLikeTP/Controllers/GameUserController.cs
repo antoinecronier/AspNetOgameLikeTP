@@ -101,6 +101,13 @@ namespace ASPNetOgameLikeTP.Controllers
             return PartialView("GameUserPageContent", GameUserController.vm);
         }
 
+        public ActionResult RefreshPlanetResources(int planetId)
+        {
+            this.resourceService.RefreshResources(GameUserController.vm);
+            List<Resource> resources = GameUserController.vm.Universe.SolarSystems.SelectMany(y => y.Planets).FirstOrDefault(x => x.Id == planetId).Resources;
+            return PartialView("~/Views/GameUser/GameUserResources.cshtml", resources);
+        }
+
         [ChildActionOnly]
         public ActionResult GetHeadband(GameUserVM vm)
         {

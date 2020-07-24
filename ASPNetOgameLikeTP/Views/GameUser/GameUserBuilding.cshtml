@@ -12,6 +12,26 @@
     <img src="@Url.Content(@Model.Print)" style="max-width:120px" />
 </div>
 
+<div class="row">
+    Coût prochain niveau :
+</div>
+
+@foreach (var resource in Model.NextCost)
+{
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-4" style="text-align:left">
+            @resource.Name
+        </div>
+        <div class="col-md-6" style="text-align:left">
+            @resource.LastQuantity
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+}
+
 @{
     string buildingHTMLId = "building" + Model.Id;
 }
@@ -23,7 +43,34 @@
     AllowCache = false,
     InsertionMode = InsertionMode.Replace,
     UpdateTargetId = buildingHTMLId,
-    OnComplete = "reloadResources",
+    OnComplete = "upgradeBuilding" + Model.Id,
 })
 </div>
 
+@{
+    System.Text.StringBuilder builder = new System.Text.StringBuilder();
+    builder.Append("<script type=\"text/javascript\">");
+    builder.Append("function upgradeBuilding" + Model.Id + "() {");
+    foreach (var resource in Model.NextCost)
+    {
+        builder.Append("    var " + resource.Name + "NewQty = document.getElementById(" + "res-" + resource.Name + "-qty" + ").innerHTML - " + resource.LastQuantity + " ;");
+    }
+    builder.Append("}");
+    builder.Append("</script>");
+    Html.Raw(HttpUtility.HtmlDecode(builder.ToString()));
+}
+
+@{
+
+    var functionDeclaration = "function " + "upgradeBuilding" + Model.Id + "(){";
+
+}
+<script type="text/javascript">
+    @functionDeclaration
+    @foreach (var resource in Model.NextCost)
+    {
+        @:var @resource.Name = document.getElementById("res-" + @resource.Name + "-qty");
+        @:alert(@resource.Name);
+    }
+    }
+</script>

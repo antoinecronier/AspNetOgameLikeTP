@@ -1,22 +1,18 @@
 ﻿@model List<ASPNetOgameLikeTPClassLibrary.Entities.Resource>
 
-@foreach (var item in Model)
-{
-    <div class="row">
-        <img class="col-md-3" src="@Url.Content(@item.Print)" />
-        <div class="col-md-3" style="text-align:center">
-            @Html.DisplayFor(x => item.Name)
-        </div>
-        <div class="col-md-3" style="text-align:center">
-            @Html.DisplayFor(x => item.LastQuantity)
-        </div>
-    </div>
-}
+@{
 
-@Ajax.BeginForm("GetResources", "GameUser", new AjaxOptions()
-{
-HttpMethod = "GET",
-AllowCache = false,
-InsertionMode = InsertionMode.Replace,
-UpdateTargetId = "contentResources",
-}, new { @id = "reloadResources", @style = "display:none" })
+    foreach (var item in Model)
+    {
+        var resourceId = "res-" + item.Name + "-qty";
+        <div class="row">
+            <img class="col-md-3" src="@Url.Content(@item.Print)" />
+            <div class="col-md-3" style="text-align:center">
+                @Html.DisplayFor(x => item.Name)
+            </div>
+            <div id="@resourceId" class="col-md-3" style="text-align:center">
+                @Html.DisplayFor(x => item.LastQuantity)
+            </div>
+        </div>
+    }
+}
