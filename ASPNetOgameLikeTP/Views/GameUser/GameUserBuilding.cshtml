@@ -61,7 +61,6 @@
 }
 
 @{
-
     var functionDeclaration = "function " + "upgradeBuilding" + Model.Id + "(){";
 
 }
@@ -87,4 +86,19 @@
             }
         }
     }
+
+    $(document).ready(
+        function () {
+            setInterval(function () {
+                @if (Model is ASPNetOgameLikeTPClassLibrary.Entities.ResourceGenerator)
+                {
+                    var rG = Model as ASPNetOgameLikeTPClassLibrary.Entities.ResourceGenerator;
+                    foreach (var resource in rG.ResourceBySecond)
+                    {
+                        @:var @resource.Name = document.getElementById("res-@resource.Name-qty")
+                        @:@resource.Name .innerHTML = @resource.Name .innerHTML - 0 + @resource.LastQuantity;
+                    }
+                }
+            }, 1000);  //Delay here = 5 seconds
+        });
 </script>

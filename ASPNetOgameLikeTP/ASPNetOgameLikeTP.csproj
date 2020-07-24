@@ -167,6 +167,10 @@
     <Compile Include="Migrations\202007211015308_Partie7-1.Designer.cs">
       <DependentUpon>202007211015308_Partie7-1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007241407467_Partie8.cs" />
+    <Compile Include="Migrations\202007241407467_Partie8.Designer.cs">
+      <DependentUpon>202007241407467_Partie8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BuildingVM.cs" />
     <Compile Include="Models\GameAdminVM.cs" />
@@ -301,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007211015308_Partie7-1.resx">
       <DependentUpon>202007211015308_Partie7-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007241407467_Partie8.resx">
+      <DependentUpon>202007241407467_Partie8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

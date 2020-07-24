@@ -15,7 +15,7 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
         #region Private class variable
         private long? id;
         private String name;
-        private int? lastQuantity;
+        private double? lastQuantity;
         private DateTime lastUpdate;
         private string print;
         #endregion
@@ -27,8 +27,8 @@ namespace ASPNetOgameLikeTPClassLibrary.Entities
             set { name = value; }
         }
 
-        [IntValidator(0, int.MaxValue)]
-        public int? LastQuantity
+        [DoubleValidator(0, Double.MaxValue)]
+        public double? LastQuantity
         {
             get { return lastQuantity; }
             set { lastQuantity = value; }

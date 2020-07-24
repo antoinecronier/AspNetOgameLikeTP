@@ -66,6 +66,7 @@
     <Compile Include="Utils\ClassUtil.cs" />
     <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Validators\DatetimeLessThanNow.cs" />
+    <Compile Include="Validators\DoubleValidator.cs" />
     <Compile Include="Validators\IntValidator.cs" />
     <Compile Include="Validators\PlanetResourcesValidator.cs" />
   </ItemGroup>
